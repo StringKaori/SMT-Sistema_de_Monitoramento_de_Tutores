@@ -1,5 +1,5 @@
 import { ProfessorCardData } from "@common/types/ProfessorCardData";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from "react-native";
 
 interface ProfessorCardProps {
   data: ProfessorCardData
@@ -7,9 +7,12 @@ interface ProfessorCardProps {
 
 const ProfessorCard = (props: ProfessorCardProps) => {
   const { name, room, initialDate, endDate } = props.data;
+  const { width, height } = useWindowDimensions();
+
+  const styles = createStyles(width, height);
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
 
       <Text style={styles.text}>
         {name}
@@ -20,11 +23,11 @@ const ProfessorCard = (props: ProfessorCardProps) => {
           {room} {initialDate} - {endDate}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (width: number, height: number) => StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: 'center',
@@ -33,8 +36,9 @@ const styles = StyleSheet.create({
     borderColor: '#B3FF98',
     borderRadius: 10,
 
-    width: 185,
-    height: 72,
+    width: width * 0.45,
+    height: height * 0.1,
+    margin: 5
     
   },
 
@@ -43,6 +47,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
+    fontSize: height * 0.02,
     color: '#49454F',
     fontWeight: 'bold'
   }

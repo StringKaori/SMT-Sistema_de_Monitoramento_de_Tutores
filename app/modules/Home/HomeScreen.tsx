@@ -1,7 +1,8 @@
 import { ProfessorCard } from "@common/components";
 import { DaysEnum } from "@common/types/DaysEnum";
 import { ProfessorCardData } from "@common/types/ProfessorCardData";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { useWindowDimensions } from "react-native";
 
 const mockProfessors: ProfessorCardData[] = [
   {
@@ -31,20 +32,21 @@ const mockProfessors: ProfessorCardData[] = [
 ];
 
 const HomeScreen = () => {
+  const { height } = useWindowDimensions();
   return (
     <View style={styles.container}>
       <Text>Home</Text>
 
-      <View style={{ height: 50 }}>
+      <View style={{ height: height * 0.05 }}>
         <FlatList
-        showsHorizontalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           data={Object.values(DaysEnum)}
           key={"daysVerticalScroll"}
           horizontal={true}
           renderItem={({ item }) => (
-            <View style={{ padding: 10 }}>
-              <Text>{item}</Text>
-            </View>
+            <TouchableOpacity style={{ padding: 10 }}>
+              <Text style={{ fontSize: height * 0.02 }}>{item}</Text>
+            </TouchableOpacity>
           )}
         />
       </View>
