@@ -1,0 +1,17 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "jsx": "react-native",
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["app/assets/*"],
+      "@routes/*": ["app/routes/*"],
+      "@common/*": ["app/common/*"],
+      "@modules/*": ["app/modules/*"]
+    }
+  }
+}
