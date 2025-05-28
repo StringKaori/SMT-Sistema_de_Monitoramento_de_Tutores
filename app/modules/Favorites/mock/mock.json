@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Rafael Muniz",
+    "room": "A403",
+    "initialDate": "19:30",
+    "endDate": "22:00"
+  },
+  {
+    "name": "Wilson Vendramel",
+    "room": "B503",
+    "initialDate": "19:00",
+    "endDate": "21:30"
+  }
+]

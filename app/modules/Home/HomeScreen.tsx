@@ -50,20 +50,27 @@ const HomeScreen = () => {
             <TouchableOpacity
               style={[
                 styles.dayButton,
-                { backgroundColor: selectedDay === item ? "#B3FF98" : "transparent" },
+                {
+                  backgroundColor:
+                    selectedDay === item ? "#B3FF98" : "transparent",
+                },
               ]}
               onPress={() => handlePress(item)}
             >
               {/* TODO: melhorar essa coisa horrível */}
+              {item === today && (
+                <Text style={{ fontSize: 10, color: "#45B71B" }}>Today</Text>
+              )}
               <Text
                 style={[
-                  { fontSize: height * 0.017 },
-                  { color: selectedDay === item ? "#45B71B" : "#000" },
+                  {
+                    fontSize: height * 0.017,
+                    color: selectedDay === item ? "#45B71B" : "#000",
+                  },
                 ]}
               >
                 {item}
               </Text>
-              {item === today && <Text style={{ fontSize: 10, color: "#45B71B" }}>Today</Text>}
             </TouchableOpacity>
           )}
         />
