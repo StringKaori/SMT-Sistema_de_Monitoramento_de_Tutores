@@ -1,0 +1,132 @@
+{
+  "Monday": [
+    {
+      "name": "Ana Paula Muller Giancoli",
+      "room": "B401",
+      "initialDate": "19:00",
+      "endDate": "21:00"
+    },
+    {
+      "name": "André Leme",
+      "room": "A402",
+      "initialDate": "20:00",
+      "endDate": "22:30"
+    },
+    {
+      "name": "Wilson Vendramel",
+      "room": "A501",
+      "initialDate": "18:30",
+      "endDate": "20:30"
+    },
+    {
+      "name": "Flávio Amate",
+      "room": "B502",
+      "initialDate": "19:00",
+      "endDate": "22:00"
+    }
+  ],
+  "Tuesday": [
+    {
+      "name": "Rafael Muniz",
+      "room": "A403",
+      "initialDate": "19:30",
+      "endDate": "22:00"
+    },
+    {
+      "name": "Ana Paula Muller Giancoli",
+      "room": "B402",
+      "initialDate": "18:00",
+      "endDate": "20:00"
+    },
+    {
+      "name": "André Leme",
+      "room": "A504",
+      "initialDate": "20:00",
+      "endDate": "22:30"
+    },
+    {
+      "name": "Wilson Vendramel",
+      "room": "B503",
+      "initialDate": "19:00",
+      "endDate": "21:30"
+    }
+  ],
+  "Wednesday": [
+    {
+      "name": "Flávio Amate",
+      "room": "A405",
+      "initialDate": "19:00",
+      "endDate": "22:30"
+    },
+    {
+      "name": "Rafael Muniz",
+      "room": "B403",
+      "initialDate": "18:30",
+      "endDate": "21:00"
+    },
+    {
+      "name": "Ana Paula Muller Giancoli",
+      "room": "A506",
+      "initialDate": "19:30",
+      "endDate": "22:00"
+    },
+    {
+      "name": "André Leme",
+      "room": "B504",
+      "initialDate": "20:00",
+      "endDate": "22:30"
+    }
+  ],
+  "Thursday": [
+    {
+      "name": "Wilson Vendramel",
+      "room": "A407",
+      "initialDate": "18:30",
+      "endDate": "21:30"
+    },
+    {
+      "name": "Flávio Amate",
+      "room": "B505",
+      "initialDate": "19:00",
+      "endDate": "21:00"
+    },
+    {
+      "name": "Rafael Muniz",
+      "room": "A508",
+      "initialDate": "19:30",
+      "endDate": "22:00"
+    },
+    {
+      "name": "Ana Paula Muller Giancoli",
+      "room": "B506",
+      "initialDate": "20:00",
+      "endDate": "22:30"
+    }
+  ],
+  "Friday": [
+    {
+      "name": "André Leme",
+      "room": "A401",
+      "initialDate": "19:00",
+      "endDate": "21:30"
+    },
+    {
+      "name": "Wilson Vendramel",
+      "room": "B507",
+      "initialDate": "18:00",
+      "endDate": "20:30"
+    },
+    {
+      "name": "Flávio Amate",
+      "room": "A502",
+      "initialDate": "20:00",
+      "endDate": "22:30"
+    },
+    {
+      "name": "Rafael Muniz",
+      "room": "B508",
+      "initialDate": "19:30",
+      "endDate": "22:00"
+    }
+  ]
+}

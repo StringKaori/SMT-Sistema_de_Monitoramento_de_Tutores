@@ -1,8 +1,8 @@
-import { ProfessorCardData } from "@common/types/ProfessorCardData";
+import { ProfessorData } from "@common/types/ProfessorCardData";
 import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from "react-native";
 
 interface ProfessorCardProps {
-  data: ProfessorCardData
+  data: ProfessorData
 }
 
 const ProfessorCard = (props: ProfessorCardProps) => {
@@ -37,7 +37,7 @@ const createStyles = (width: number, height: number) => StyleSheet.create({
     borderRadius: 10,
 
     width: width * 0.45,
-    height: height * 0.1,
+    height: height * 0.078,
     margin: 5
     
   },
@@ -47,7 +47,7 @@ const createStyles = (width: number, height: number) => StyleSheet.create({
   },
 
   text: {
-    fontSize: height * 0.02,
+    fontSize: height * 0.017,
     color: '#49454F',
     fontWeight: 'bold'
   }
