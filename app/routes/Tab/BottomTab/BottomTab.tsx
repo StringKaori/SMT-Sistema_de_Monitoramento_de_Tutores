@@ -8,14 +8,18 @@ import { BottomTabParamList } from "./types/BottomTabParamList";
 import { HomeScreen } from "@modules/Home/HomeScreen";
 import { FavoritesScreen } from "@modules/Favorites/FavoritesScreen";
 import { RoomsScreen } from "@modules/Rooms/RoomsScreen";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const BottomTab = () => {
   const Tab = createBottomTabNavigator<BottomTabParamList>();
+  const insets = useSafeAreaInsets();
 
   return (
     <Tab.Navigator
       screenOptions={({ navigation }) => ({
         tabBarStyle: {
+          
+          height: 60 + insets.bottom,
           elevation: 0,
           borderTopWidth: 1,
           borderTopColor: "#e2e2e2",
