@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.SMTSistema_de_Monitoramento_de_Tutores"
     },
     "web": {
       "favicon": "./assets/favicon.png"

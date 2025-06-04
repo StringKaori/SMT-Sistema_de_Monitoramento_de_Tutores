@@ -1,0 +1,46 @@
+{
+    "1st Floor": [
+      {"room": "LAB. DE MECÂNICA", "code": "B101"},
+      {"room": "LAB. DE METROLOGIA", "code": "B102"},
+      {"room": "SALA DE AULA", "code": "B106"},
+      {"room": "LAB. ENSAIOS MECÂNICOS", "code": "B107"}
+    ],
+    "2nd Floor": [
+      {"room": "LAB. DE TELECOM. E REDES IND.", "code": "B201"},
+      {"room": "LAB. DE ELETROTÉCNICA", "code": "B202"},
+      {"room": "LAB. DE ELETRÔNICA", "code": "B206"},
+      {"room": "LAB. DE ELETRÔNICA", "code": "B207"},
+      {"room": "LAB. DE CNC", "code": "B208"},
+      {"room": "LAB. CONTROLADOR LÓG. PROG.-CLP", "code": "B209"},
+      {"room": "LAB. HIDRÁULICA E PNEUMÁTICA", "code": "B210"}
+    ],
+    "3rd Floor": [
+      {"room": "SALA DE REUNIÃO", "code": "B323"}
+    ],
+    "4th Floor": [
+      {"room": "INFORMÁTICA", "code": "A401"},
+      {"room": "INFORMÁTICA", "code": "A402"},
+      {"room": "INFORMÁTICA", "code": "A405"},
+      {"room": "INFORMÁTICA", "code": "A406"},
+      {"room": "INFORMÁTICA", "code": "A407"},
+      {"room": "INFORMÁTICA", "code": "A408"},
+      {"room": "LAB. QUÍMICA/BIOLOGIA", "code": "B401"},
+      {"room": "LAB. DE FÍSICA", "code": "B404"},
+      {"room": "LAB. ARTES/LÍNGUAS", "code": "B405"}
+    ],
+    "5th Floor": [
+      {"room": "SALA DE EVENTOS", "code": "A501"},
+      {"room": "SALA DE PESQUISA", "code": "A504"},
+      {"room": "INFORMÁTICA", "code": "A505"},
+      {"room": "INFORMÁTICA", "code": "A506"},
+      {"room": "LEM - MATEMÁTICA", "code": "A507"},
+      {"room": "SALA DE AULA", "code": "B501"},
+      {"room": "SALA DE AULA", "code": "B503"},
+      {"room": "SALA DE AULA", "code": "B505"},
+      {"room": "SALA DE AULA", "code": "B509"},
+      {"room": "SALA DE AULA", "code": "B511"},
+      {"room": "SALA DE AULA", "code": "B513"},
+      {"room": "SALA DE AULA", "code": "B515"},
+      {"room": "SALA DE AULA", "code": "B516"}
+    ]
+  }

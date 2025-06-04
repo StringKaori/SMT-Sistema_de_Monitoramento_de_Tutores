@@ -1,18 +1,27 @@
 import { ProfessorData } from "@common/types/ProfessorCardData";
+import { useNavigation,  } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from "react-native";
 
 interface ProfessorCardProps {
   data: ProfessorData
 }
 
+type MyScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 const ProfessorCard = (props: ProfessorCardProps) => {
-  const { name, room, initialDate, endDate } = props.data;
+  const data = props.data
+  const { name, room, initialDate, endDate } = data;
   const { width, height } = useWindowDimensions();
 
   const styles = createStyles(width, height);
+  const navigation = useNavigation<MyScreenNavigationProp>();
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity 
+     style={styles.container}
+     onPress={() => navigation.navigate("ProfessorScreen", data)}>
 
       <Text style={styles.text}>
         {name}

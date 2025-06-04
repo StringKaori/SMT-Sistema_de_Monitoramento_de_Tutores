@@ -1,4 +1,6 @@
+import { ProfessorData } from "@common/types/ProfessorCardData";
+
 export type RootStackParamList = {
     BottomTab: undefined;
-    MoreDetailsView: {};
+    ProfessorScreen: ProfessorData;
 }

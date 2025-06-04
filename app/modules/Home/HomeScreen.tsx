@@ -1,4 +1,4 @@
-import { ProfessorCard } from "@common/components";
+import { HorizontalScroller, ProfessorCard } from "@common/components";
 import { DaysEnum } from "@common/types/DaysEnum";
 import { ProfessorCardData } from "@common/types/ProfessorCardData";
 import { useEffect, useState } from "react";
@@ -7,15 +7,12 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  TouchableOpacity,
 } from "react-native";
-import { useWindowDimensions } from "react-native";
 import mock from "./mock/mock.json";
 
 const mockProfessors: ProfessorCardData = mock;
 
 const HomeScreen = () => {
-  const { height } = useWindowDimensions();
   const [selectedDay, setSelectedDay] = useState<DaysEnum>();
   const [today, setToday] = useState<DaysEnum>();
 
@@ -26,7 +23,7 @@ const HomeScreen = () => {
         weekday: "long",
       });
       setToday(todayString as DaysEnum);
-      setSelectedDay(today as DaysEnum);
+      setSelectedDay(todayString as DaysEnum);
     };
 
     getTodayString();
@@ -39,48 +36,19 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={{ alignSelf: `flex-start`, padding: 10 }}>ADS *</Text>
-
-      <View style={{ height: height * 0.05 }}>
-        <FlatList
-          showsHorizontalScrollIndicator={false}
-          data={Object.values(DaysEnum)}
-          key={"daysVerticalScroll"}
-          horizontal={true}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={[
-                styles.dayButton,
-                {
-                  backgroundColor:
-                    selectedDay === item ? "#B3FF98" : "transparent",
-                },
-              ]}
-              onPress={() => handlePress(item)}
-            >
-              {/* TODO: melhorar essa coisa horrível */}
-              {item === today && (
-                <Text style={{ fontSize: 10, color: "#45B71B" }}>Today</Text>
-              )}
-              <Text
-                style={[
-                  {
-                    fontSize: height * 0.017,
-                    color: selectedDay === item ? "#45B71B" : "#000",
-                  },
-                ]}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
+      <HorizontalScroller
+        flatListData={Object.values(DaysEnum)}
+        selectedItem={selectedDay}
+        handlePress={handlePress}
+        shouldShowToday
+        today={today}
+      />
 
       {/* TODO: - Fix spacing in between cards */}
       <FlatList
         data={mockProfessors[selectedDay ?? "Monday"]}
         numColumns={2}
-        key={"GridView"}
+        key={"ProfessorGridView"}
         style={{ paddingTop: 20 }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <ProfessorCard data={item} />}
@@ -95,6 +63,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   dayButton: {
+    width: 110,
     alignItems: "center",
     justifyContent: "center",
     marginLeft: 10,

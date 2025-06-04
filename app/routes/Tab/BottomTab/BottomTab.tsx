@@ -19,18 +19,19 @@ const BottomTab = () => {
           elevation: 0,
           borderTopWidth: 1,
           borderTopColor: "#e2e2e2",
-          backgroundColor: '#DDFFD9',
+          backgroundColor: "#DDFFD9",
         },
         tabBarLabelStyle: {
-            color: '#45B71B',
-            fontWeight: '600',
-            fontSize: 12
+          color: "#45B71B",
+          fontWeight: "600",
+          fontSize: 12,
         },
+        tabBarLabelPosition: "below-icon",
         headerShown: true,
         header: () => <SearchBar />,
       })}
     >
-        <Tab.Screen
+      <Tab.Screen
         name={"HomeScreenTab"}
         component={HomeScreen}
         options={{
@@ -62,7 +63,6 @@ const BottomTab = () => {
           ),
         }}
       />
-
     </Tab.Navigator>
   );
 };

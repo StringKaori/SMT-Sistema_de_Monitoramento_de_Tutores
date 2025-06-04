@@ -1,7 +1,7 @@
 {
   "Monday": [
     {
-      "name": "Ana Paula Muller Giancoli",
+      "name": "Ana Paula Giancoli",
       "room": "B401",
       "initialDate": "19:00",
       "endDate": "21:00"
@@ -33,7 +33,7 @@
       "endDate": "22:00"
     },
     {
-      "name": "Ana Paula Muller Giancoli",
+      "name": "Ana Paula Giancoli",
       "room": "B402",
       "initialDate": "18:00",
       "endDate": "20:00"
@@ -65,7 +65,7 @@
       "endDate": "21:00"
     },
     {
-      "name": "Ana Paula Muller Giancoli",
+      "name": "Ana Paula Giancoli",
       "room": "A506",
       "initialDate": "19:30",
       "endDate": "22:00"
@@ -97,7 +97,7 @@
       "endDate": "22:00"
     },
     {
-      "name": "Ana Paula Muller Giancoli",
+      "name": "Ana Paula Giancoli",
       "room": "B506",
       "initialDate": "20:00",
       "endDate": "22:30"
