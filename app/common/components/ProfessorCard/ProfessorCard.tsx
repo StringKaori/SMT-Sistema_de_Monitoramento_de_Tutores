@@ -2,7 +2,9 @@ import { ProfessorData } from "@common/types/ProfessorCardData";
 import { useNavigation,  } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
-import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from "react-native";
+import { ThemeColors } from "app/theme/types/ThemeType";
+import { useThemeStore } from "app/theme/useThemeStore";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 interface ProfessorCardProps {
   data: ProfessorData
@@ -13,9 +15,9 @@ type MyScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 const ProfessorCard = (props: ProfessorCardProps) => {
   const data = props.data
   const { name, room, initialDate, endDate } = data;
-  const { width, height } = useWindowDimensions();
+  const { width, height, theme } = useThemeStore();
 
-  const styles = createStyles(width, height);
+  const styles = createStyles(width, height, theme.colors);
   const navigation = useNavigation<MyScreenNavigationProp>();
 
   return (
@@ -28,7 +30,7 @@ const ProfessorCard = (props: ProfessorCardProps) => {
       </Text>
 
       <View style={styles.verticalView}>
-        <Text style={styles.text}>
+        <Text style={[styles.secondaryText]}>
           {room} {initialDate} - {endDate}
         </Text>
       </View>
@@ -36,13 +38,13 @@ const ProfessorCard = (props: ProfessorCardProps) => {
   );
 };
 
-const createStyles = (width: number, height: number) => StyleSheet.create({
+const createStyles = (width: number, height: number, colors: ThemeColors) => StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: 'center',
     
     borderWidth: 2,
-    borderColor: '#B3FF98',
+    borderColor: colors.outline,
     borderRadius: 10,
 
     width: width * 0.45,
@@ -57,8 +59,14 @@ const createStyles = (width: number, height: number) => StyleSheet.create({
 
   text: {
     fontSize: height * 0.017,
-    color: '#49454F',
+    color: colors.primaryText,
     fontWeight: 'bold'
+  },
+
+  secondaryText: {
+    fontSize: height * 0.017,
+    color: colors.secondaryText,
+    fontWeight: '400'
   }
 });
 

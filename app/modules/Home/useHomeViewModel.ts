@@ -10,7 +10,6 @@ const useHomeViewModel = (): HomeViewModel => {
     const [selectedDay, setSelectedDay] = useState<DaysEnum>();
     const [today, setToday] = useState<DaysEnum>();
 
-    // TODO: investigar o pq disso não carregar a tempo do load
     useEffect(() => {
         const todayDate = new Date();
         const todayString = todayDate.toLocaleDateString("en-US", {
@@ -18,7 +17,6 @@ const useHomeViewModel = (): HomeViewModel => {
         });
         setToday(todayString as DaysEnum);
         setSelectedDay(today as DaysEnum);
-        
     }, []);
 
     const handlePress = (item: DaysEnum) => {

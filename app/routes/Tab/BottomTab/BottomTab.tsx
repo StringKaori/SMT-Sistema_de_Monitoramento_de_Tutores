@@ -1,18 +1,26 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SearchBar } from "@common/components";
-import HomeSVG from "@assets/home_icon.svg";
-import FavoriteSVG from "@assets/favorite_icon.svg";
-import RoomsSVG from "@assets/rooms_icon.svg";
 import { TabBarIcon } from "../../utils/TabBarIcon";
 import { BottomTabParamList } from "./types/BottomTabParamList";
 import { HomeScreen } from "@modules/Home/HomeScreen";
 import { FavoritesScreen } from "@modules/Favorites/FavoritesScreen";
 import { RoomsScreen } from "@modules/Rooms/RoomsScreen";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useThemeStore } from "app/theme/useThemeStore";
+
+import HomeSVG from "@assets/home_icon.svg";
+import FocusedHomeSVG from "@assets/focused_home_icon.svg";
+import FavoriteSVG from "@assets/favorite_icon.svg";
+import FocusedFavoriteSVG from "@assets/focused_favorite_icon.svg";
+import RoomsSVG from "@assets/rooms_icon.svg";
+import FocusedRoomsSVG from "@assets/focused_rooms_icon.svg";
+import ProfileSVG from "@assets/profile_icon.svg";
+import FocusedProfileSVG from "@assets/focused_profile_icon.svg";
 
 const BottomTab = () => {
   const Tab = createBottomTabNavigator<BottomTabParamList>();
   const insets = useSafeAreaInsets();
+  const { theme } = useThemeStore();
 
   return (
     <Tab.Navigator
@@ -22,11 +30,11 @@ const BottomTab = () => {
           height: 60 + insets.bottom,
           elevation: 0,
           borderTopWidth: 1,
-          borderTopColor: "#e2e2e2",
-          backgroundColor: "#DDFFD9",
+          borderTopColor: theme.colors.outline,
+          backgroundColor: theme.colors.primary,
         },
         tabBarLabelStyle: {
-          color: "#45B71B",
+          color: theme.colors.highlightedText,
           fontWeight: "600",
           fontSize: 12,
         },
@@ -41,7 +49,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} SVG={HomeSVG} />
+            <TabBarIcon focused={focused} DefaultSVG={HomeSVG} FocusedSVG={FocusedHomeSVG } />
           ),
         }}
       />
@@ -52,7 +60,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: "Favorites",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} SVG={FavoriteSVG} />
+            <TabBarIcon focused={focused} DefaultSVG={FavoriteSVG} FocusedSVG={FocusedFavoriteSVG} />
           ),
         }}
       />
@@ -63,7 +71,18 @@ const BottomTab = () => {
         options={{
           tabBarLabel: "Rooms",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} SVG={RoomsSVG} />
+            <TabBarIcon focused={focused} DefaultSVG={RoomsSVG} FocusedSVG={FocusedRoomsSVG} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name={"ProfileScreenTab"}
+        component={RoomsScreen}
+        options={{
+          tabBarLabel: "Rooms",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} DefaultSVG={ProfileSVG} FocusedSVG={FocusedProfileSVG} />
           ),
         }}
       />

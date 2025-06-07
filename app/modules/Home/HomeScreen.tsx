@@ -62,17 +62,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  dayButton: {
-    width: 110,
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 10,
-    padding: 10,
-
-    borderWidth: 2,
-    borderColor: "#B3FF98",
-    borderRadius: 10,
-  },
 });
 
 export { HomeScreen };
