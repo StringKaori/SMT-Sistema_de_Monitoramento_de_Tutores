@@ -1,56 +1,35 @@
 import { HorizontalScroller, ProfessorCard } from "@common/components";
 import { DaysEnum } from "@common/types/DaysEnum";
-import { ProfessorCardData } from "@common/types/ProfessorCardData";
-import { useEffect, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   FlatList,
 } from "react-native";
-import mock from "./mock/mock.json";
 import { CourseSelector } from "@common/components/CourseSelector/CourseSelector";
-
-const mockProfessors: ProfessorCardData = mock;
+import { useHomeViewModel } from "./useHomeViewModel";
 
 const HomeScreen = () => {
-  const [selectedDay, setSelectedDay] = useState<DaysEnum>();
-  const [today, setToday] = useState<DaysEnum>();
-
-  useEffect(() => {
-    const getTodayString = () => {
-      const todayDate = new Date();
-      const todayString = todayDate.toLocaleDateString("en-US", {
-        weekday: "long",
-      });
-      setToday(todayString as DaysEnum);
-      setSelectedDay(todayString as DaysEnum);
-    };
-
-    getTodayString();
-  }, []);
-
-  const handlePress = (item: DaysEnum) => {
-    setSelectedDay(item);
-  };
+  const viewModel = useHomeViewModel();
+  
 
   return (
     <View style={styles.container}>
       <CourseSelector/>
       <HorizontalScroller
         flatListData={Object.values(DaysEnum)}
-        selectedItem={selectedDay}
-        handlePress={handlePress}
-        today={today}
+        selectedItem={viewModel.selectedDay}
+        handlePress={viewModel.handlePress}
+        today={viewModel.today}
       />
 
       <FlatList
-        data={mockProfessors[selectedDay ?? "Monday"]}
+        data={viewModel.mockProfessors[viewModel.selectedDay ?? "Monday"]}
         numColumns={2}
         key={"ProfessorGridView"}
         style={{ paddingTop: 20 }}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <ProfessorCard data={item} />}
+        renderItem={({ item }) => <ProfessorCard data={item} navigation={viewModel.navigation} />}
       />
     </View>
   );

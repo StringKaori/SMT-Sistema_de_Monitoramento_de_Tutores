@@ -1,4 +1,5 @@
 import { ProfessorData } from "@common/types/ProfessorCardData";
+import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 import { useNavigation,  } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
@@ -7,18 +8,16 @@ import { useThemeStore } from "app/theme/useThemeStore";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 interface ProfessorCardProps {
-  data: ProfessorData
+  data: ProfessorData, 
+  navigation: RootStackNavigationProp
 }
 
-type MyScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
 const ProfessorCard = (props: ProfessorCardProps) => {
-  const data = props.data
+  const { data, navigation } = props
   const { name, room, initialDate, endDate } = data;
   const { width, height, theme } = useThemeStore();
 
   const styles = createStyles(width, height, theme.colors);
-  const navigation = useNavigation<MyScreenNavigationProp>();
 
   return (
     <TouchableOpacity 
