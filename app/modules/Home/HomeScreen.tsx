@@ -40,11 +40,9 @@ const HomeScreen = () => {
         flatListData={Object.values(DaysEnum)}
         selectedItem={selectedDay}
         handlePress={handlePress}
-        shouldShowToday
         today={today}
       />
 
-      {/* TODO: - Fix spacing in between cards */}
       <FlatList
         data={mockProfessors[selectedDay ?? "Monday"]}
         numColumns={2}
