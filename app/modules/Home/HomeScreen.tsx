@@ -9,6 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import mock from "./mock/mock.json";
+import { CourseSelector } from "@common/components/CourseSelector/CourseSelector";
 
 const mockProfessors: ProfessorCardData = mock;
 
@@ -35,7 +36,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ alignSelf: `flex-start`, padding: 10 }}>ADS *</Text>
+      <CourseSelector/>
       <HorizontalScroller
         flatListData={Object.values(DaysEnum)}
         selectedItem={selectedDay}

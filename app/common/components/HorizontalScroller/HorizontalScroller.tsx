@@ -32,6 +32,7 @@ const HorizontalScroller = (props: Props) => {
         style={{ marginRight: 10 }}
         horizontal={true}
         renderItem={({ item }) => (
+          // TODO: rever lógica de "today" para deixar genérico
           <TouchableOpacity
             style={[
               styles.dayButton,

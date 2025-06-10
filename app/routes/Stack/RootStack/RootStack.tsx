@@ -26,7 +26,7 @@ const RootStack = () => {
       <Stack.Screen
         name={"ProfessorScreen"}
         component={ProfessorScreen}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, headerTitle: '' }}
       />
     </Stack.Navigator>
   );
