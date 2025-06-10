@@ -1,30 +1,24 @@
 import { HorizontalScroller, RoomCard } from "@common/components";
 import { FloorsEnum } from "@common/types/FloorsEnum";
-import { useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import Mock from './mock/mock.json'
-import { RoomCardData } from "@common/types/RoomCardData";
+import { useRoomViewModel } from "./useRoomViewModel";
 
 const RoomsScreen = () => {
-  const mockRooms: RoomCardData = Mock;
-  const [selectedFloor, setSelectedFloor] = useState<FloorsEnum>(FloorsEnum.First);
-  const handlePress = (item: FloorsEnum) => {
-    setSelectedFloor(item)
-  }
+  const viewModel = useRoomViewModel();
   return (
     <View style={styles.container}>
       <HorizontalScroller
         flatListData={Object.values(FloorsEnum)}
-        selectedItem={selectedFloor}
-        handlePress={handlePress}
+        selectedItem={viewModel.selectedFloor}
+        handlePress={viewModel.handlePress}
       />
       <FlatList
-        data={mockRooms[selectedFloor ?? "First"]}
+        data={viewModel.mockRooms[viewModel.selectedFloor ?? "First"]}
         numColumns={2}
         key={"RoomGridView"}
         style={{ paddingTop: 20 }}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <RoomCard data={item} />}
+        renderItem={({ item }) => <RoomCard data={item} navigation={viewModel.navigation} />}
       />
     </View>
   );

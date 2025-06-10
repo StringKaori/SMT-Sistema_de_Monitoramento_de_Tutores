@@ -1,20 +1,25 @@
 import { RoomData } from "@common/types/RoomCardData";
+import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
 interface RoomCardProps {
-  data: RoomData;
+  data: RoomData,
+  navigation: RootStackNavigationProp
 }
 
 const RoomCard = (props: RoomCardProps) => {
-  const { code } = props.data;
+  const { data, navigation } = props
+  const { room, code } = data;
   const { width, height, theme } = useThemeStore();
 
   const styles = createStyles(width, height, theme.colors);
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity 
+      style={styles.container}
+      onPress={() => navigation.navigate("RoomsMoreInfoScreen", data)}>
       <Text style={styles.text}>{code}</Text>
     </TouchableOpacity>
   );

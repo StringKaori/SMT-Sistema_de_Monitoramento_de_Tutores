@@ -5,6 +5,7 @@ import { useThemeStore } from "app/theme/useThemeStore";
 import { BottomTab } from "@routes/Tab/BottomTab/BottomTab";
 import { ProfessorScreen } from "@modules/Professor/ProfessorScreen";
 import { LoginScreen } from "@modules/Login/LoginScreen";
+import { RoomsMoreInfo } from "@modules/Rooms/RoomsMoreInfo";
 
 const RootStack = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -28,6 +29,10 @@ const RootStack = () => {
         component={ProfessorScreen}
         options={{ headerShown: true, headerTitle: '' }}
       />
+      <Stack.Screen
+        name={"RoomsMoreInfoScreen"}
+        component={RoomsMoreInfo}
+        options={{ headerShown: true, headerTitle: '' }}/>
     </Stack.Navigator>
   );
 };
