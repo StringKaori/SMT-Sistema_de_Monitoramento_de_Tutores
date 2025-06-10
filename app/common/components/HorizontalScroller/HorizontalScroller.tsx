@@ -14,13 +14,12 @@ interface Props {
   flatListData: itemType[];
   selectedItem: itemType;
   handlePress: (item: any) => void;
-  shouldShowToday?: boolean;
   today?: DaysEnum;
 }
 
 const HorizontalScroller = (props: Props) => {
   const { height, width, theme } = useThemeStore();
-  const { flatListData, selectedItem, handlePress, shouldShowToday, today } =
+  const { flatListData, selectedItem, handlePress, today } =
     props;
   const styles = createStyles(height, width, theme.colors.outline);
 
@@ -38,23 +37,21 @@ const HorizontalScroller = (props: Props) => {
               styles.dayButton,
               {
                 backgroundColor:
-                  selectedItem === item ? theme.colors.primary : "transparent",
+                  today === item ? theme.colors.primary : "transparent",
+                borderColor:
+                  selectedItem === item
+                    ? theme.colors.primary
+                    : theme.colors.outline,
               },
             ]}
             onPress={() => handlePress(item)}
           >
-            {/* TODO: melhorar essa coisa horrível */}
-            {shouldShowToday && item === today && (
-              <Text style={{ fontSize: 10, color: theme.colors.primaryText }}>
-                Today
-              </Text>
-            )}
             <Text
               style={[
                 {
                   fontSize: height * 0.017,
                   color:
-                    selectedItem === item
+                    today === item
                       ? theme.colors.highlightedText
                       : theme.colors.primaryText,
                 },
@@ -62,6 +59,19 @@ const HorizontalScroller = (props: Props) => {
             >
               {item}
             </Text>
+            {selectedItem === item && (
+              <View
+                style={[
+                  styles.selected,
+                  {
+                    backgroundColor:
+                      today === item
+                        ? theme.colors.highlightedText
+                        : theme.colors.primary,
+                  },
+                ]}
+              />
+            )}
           </TouchableOpacity>
         )}
       />
@@ -79,9 +89,15 @@ const createStyles = (height: number, width: number, borderColor: string) =>
       marginLeft: 10,
       padding: 10,
 
-      borderWidth: 2,
+      borderWidth: 2 ,
       borderColor: borderColor,
       borderRadius: 16,
+    },
+    selected: {
+      marginTop: 2,
+      height: "10%",
+      width: "85%",
+      borderRadius: 10,
     },
   });
 
