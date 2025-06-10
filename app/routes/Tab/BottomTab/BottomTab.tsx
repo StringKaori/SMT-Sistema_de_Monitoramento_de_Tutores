@@ -80,7 +80,7 @@ const BottomTab = () => {
         name={"ProfileScreenTab"}
         component={RoomsScreen}
         options={{
-          tabBarLabel: "Rooms",
+          tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} DefaultSVG={ProfileSVG} FocusedSVG={FocusedProfileSVG} />
           ),

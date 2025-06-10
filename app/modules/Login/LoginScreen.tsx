@@ -6,6 +6,7 @@ import { useThemeStore } from "app/theme/useThemeStore";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
+import { useState } from "react";
 
 type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
@@ -13,17 +14,24 @@ const LoginScreen = () => {
   const { theme } = useThemeStore();
   const styles = createStyles(theme.colors);
   const navigation = useNavigation<NavigationType>();
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
 
   return (
     <SafeAreaView style={styles.container}>
       <LogoSVG />
       <Text style={styles.title}>Login</Text>
       <TextInput
+        value={email}
+        onChangeText={setEmail}
         placeholder="Email"
         placeholderTextColor={theme.colors.secondaryText}
         style={styles.input}
       />
       <TextInput
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
         placeholder="Password"
         placeholderTextColor={theme.colors.secondaryText}
         style={styles.input}
@@ -60,6 +68,7 @@ const createStyles = (colors: ThemeColors) =>
       borderWidth: 1,
       borderRadius: 10,
       marginBottom: 20,
+      padding: 15
     },
     button: {
       alignItems: "center",
