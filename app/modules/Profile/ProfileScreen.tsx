@@ -2,6 +2,7 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { TitleView } from "@common/components";
+import { MenuItem } from "./Helpers/MenuItem";
 
 const ProfileScreen = () => {
     const { theme, width, height } = useThemeStore();
@@ -21,6 +22,7 @@ const ProfileScreen = () => {
             </View>
 
             <TitleView title={"Account"}/>
+            <MenuItem title={"Reset Password"}/>
         </View>
     )
 }
@@ -32,9 +34,9 @@ const createStyles = (colors: ThemeColors, width: number, height: number) => Sty
         backgroundColor: colors.background,
     },
     profileImage: {
-        width: width*0.35,
-        height: width*0.35,
-        borderRadius: width*0.35,
+        width: width * 0.35,
+        height: width * 0.35,
+        borderRadius: width * 0.35,
         marginRight: 20
     },
     name: {
