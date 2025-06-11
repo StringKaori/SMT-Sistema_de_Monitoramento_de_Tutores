@@ -2,8 +2,11 @@ import { HorizontalScroller, RoomCard } from "@common/components";
 import { FloorsEnum } from "@common/types/FloorsEnum";
 import { View, StyleSheet, FlatList } from "react-native";
 import { useRoomViewModel } from "./useRoomViewModel";
+import { useThemeStore } from "app/theme/useThemeStore";
 
 const RoomsScreen = () => {
+  const { theme } = useThemeStore();
+  const styles = createStyles(theme.colors.background);
   const viewModel = useRoomViewModel();
   return (
     <View style={styles.container}>
@@ -24,11 +27,12 @@ const RoomsScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (background: string) => StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    padding: 10
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: background
   },
 });
 

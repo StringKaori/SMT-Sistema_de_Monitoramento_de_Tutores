@@ -4,10 +4,14 @@ import mock from './mock/mock.json';
 import { ProfessorData } from "@common/types/ProfessorCardData";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
+import { useThemeStore } from "app/theme/useThemeStore";
 
 const FavoritesScreen = () => {
+  const { theme } = useThemeStore();
+  const styles = createStyles(theme.colors.background);
   const mockFavoriteProfessors: ProfessorData[] = mock 
   const navigation = useNavigation<RootStackNavigationProp>();
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -22,11 +26,12 @@ const FavoritesScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center'
-    }
-})
+const createStyles = (background: string) => StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: background
+  },
+});
 
 export { FavoritesScreen };

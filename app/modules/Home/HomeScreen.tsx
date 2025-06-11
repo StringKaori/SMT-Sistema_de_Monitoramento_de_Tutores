@@ -8,10 +8,12 @@ import {
 } from "react-native";
 import { CourseSelector } from "@common/components/CourseSelector/CourseSelector";
 import { useHomeViewModel } from "./useHomeViewModel";
+import { useThemeStore } from "app/theme/useThemeStore";
 
 const HomeScreen = () => {
   const viewModel = useHomeViewModel();
-  
+  const { theme } = useThemeStore();
+  const styles = createStyles(theme.colors.background);
 
   return (
     <View style={styles.container}>
@@ -35,10 +37,11 @@ const HomeScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (background: string) => StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
+    backgroundColor: background
   },
 });
 
