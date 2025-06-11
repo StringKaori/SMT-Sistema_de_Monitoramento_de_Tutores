@@ -21,7 +21,7 @@ const PasswordTextInput = (props: CustomTextInputProps) => {
         onPress={() => setShouldHidePassword((prev) => !prev)}
         style={styles.button}
       >
-        {shouldHidePassword ? <HidePasswordSVG></HidePasswordSVG> : <ShowPasswordSVG />}
+        {shouldHidePassword ? <HidePasswordSVG/> : <ShowPasswordSVG />}
       </TouchableOpacity>
     </View>
   );
