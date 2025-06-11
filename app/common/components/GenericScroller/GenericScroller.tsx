@@ -1,6 +1,6 @@
 import { FlatList, View } from "react-native";
 import { TitleView } from "../TitleView/TitleView";
-import { GenericTwoLineCard } from "../GenericTwoLineCard/GenericTwoLineCard";
+import { GenericTwoLineCard } from "../Cards/GenericTwoLineCard/GenericTwoLineCard";
 
 interface Props {
   title: string;
