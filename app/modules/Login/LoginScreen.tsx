@@ -1,12 +1,13 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import LogoSVG from "@assets/LogoSMT.svg";
-import { StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { useState } from "react";
+import { DefaultTextInput } from "@common/components/DefaultTextInput/DefaultTextInput";
 
 type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
@@ -21,20 +22,20 @@ const LoginScreen = () => {
     <SafeAreaView style={styles.container}>
       <LogoSVG />
       <Text style={styles.title}>Login</Text>
-      <TextInput
+
+      <DefaultTextInput
         value={email}
         onChangeText={setEmail}
         placeholder="Email"
         placeholderTextColor={theme.colors.secondaryText}
-        style={styles.input}
       />
-      <TextInput
+
+      <DefaultTextInput
         secureTextEntry
         value={password}
         onChangeText={setPassword}
         placeholder="Password"
         placeholderTextColor={theme.colors.secondaryText}
-        style={styles.input}
       />
 
       <TouchableOpacity
@@ -61,14 +62,6 @@ const createStyles = (colors: ThemeColors) =>
       fontSize: 36,
       fontWeight: "bold",
       paddingVertical: 15,
-    },
-    input: {
-      width: "90%",
-      borderColor: colors.outline,
-      borderWidth: 1,
-      borderRadius: 10,
-      marginBottom: 20,
-      padding: 15
     },
     button: {
       alignItems: "center",
