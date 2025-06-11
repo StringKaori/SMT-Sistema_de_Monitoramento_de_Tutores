@@ -1,18 +1,11 @@
 import { useThemeStore } from "app/theme/useThemeStore";
 import { StyleSheet, TextInput } from "react-native";
+import { CustomTextInputProps } from "../Types/TextInputProps";
 
-interface Props {
-  value: string | undefined;
-  secureTextEntry?: boolean;
-  onChangeText: React.Dispatch<React.SetStateAction<string | undefined>>;
-  placeholder: string;
-  placeholderTextColor: string;
-}
-
-const DefaultTextInput = (props: Props) => {
+const DefaultTextInput = (props: CustomTextInputProps) => {
   const { value, onChangeText, placeholder, placeholderTextColor, secureTextEntry } = props;
-  const { theme } = useThemeStore();
-  const styles = createStyles(theme.colors.outline);
+  const { theme, width } = useThemeStore();
+  const styles = createStyles(theme.colors.outline, width);
   return (
     <TextInput
       value={value}
@@ -25,15 +18,16 @@ const DefaultTextInput = (props: Props) => {
   );
 };
 
-const createStyles = (outlineColor: string) =>
+const createStyles = (outlineColor: string, width: number) =>
   StyleSheet.create({
     input: {
-      width: "90%",
+      width: width * 0.9,
       borderColor: outlineColor,
       borderWidth: 1,
       borderRadius: 10,
       marginBottom: 20,
       padding: 15,
+      paddingRight: 35
     },
   });
 

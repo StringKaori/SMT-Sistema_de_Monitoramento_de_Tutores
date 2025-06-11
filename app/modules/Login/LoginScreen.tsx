@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { useState } from "react";
-import { DefaultTextInput } from "@common/components";
+import { DefaultTextInput, PasswordTextInput } from "@common/components";
 
 type NavigationType = NativeStackNavigationProp<RootStackParamList>;
 
@@ -30,7 +30,7 @@ const LoginScreen = () => {
         placeholderTextColor={theme.colors.secondaryText}
       />
 
-      <DefaultTextInput
+      <PasswordTextInput
         secureTextEntry
         value={password}
         onChangeText={setPassword}
