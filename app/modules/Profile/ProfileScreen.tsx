@@ -3,10 +3,12 @@ import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { TitleView } from "@common/components";
 import { MenuItem } from "./Helpers/MenuItem";
+import { AdminModule } from "./Helpers/AdminModule";
 
 const ProfileScreen = () => {
     const { theme, width, height } = useThemeStore();
     const styles = createStyles(theme.colors, width, height);
+    const isAdmin = true;
     return (
         <View style={styles.container}>
             <View style={styles.row}>
@@ -20,6 +22,8 @@ const ProfileScreen = () => {
                     </TouchableOpacity>
                 </View>
             </View>
+            
+            {isAdmin && <AdminModule/>}
 
             <TitleView title={"Account"}/>
             <MenuItem title={"Reset Password"}/>
