@@ -16,6 +16,7 @@ import RoomsSVG from "@assets/rooms_icon.svg";
 import FocusedRoomsSVG from "@assets/focused_rooms_icon.svg";
 import ProfileSVG from "@assets/profile_icon.svg";
 import FocusedProfileSVG from "@assets/focused_profile_icon.svg";
+import { ProfileScreen } from "@modules/Profile/ProfileScreen";
 
 const BottomTab = () => {
   const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -78,7 +79,7 @@ const BottomTab = () => {
 
       <Tab.Screen
         name={"ProfileScreenTab"}
-        component={RoomsScreen}
+        component={ProfileScreen}
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
