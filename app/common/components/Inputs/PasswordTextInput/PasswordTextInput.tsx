@@ -2,8 +2,8 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { DefaultTextInput } from "../DefaultTextInput/DefaultTextInput";
 import { CustomTextInputProps } from "../Types/TextInputProps";
 import { useState } from "react";
-import ShowPasswordSVG from "@assets/focused_home_icon.svg";
-import HidePasswordSVG from "@assets/focused_rooms_icon.svg";
+import ShowPasswordSVG from "@assets/show_password_icon.svg";
+import HidePasswordSVG from "@assets/hide_password_icon.svg";
 
 const PasswordTextInput = (props: CustomTextInputProps) => {
   const [shouldHidePassword, setShouldHidePassword] = useState<boolean>(true);
