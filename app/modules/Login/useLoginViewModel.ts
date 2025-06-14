@@ -4,21 +4,25 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { loginUser, LoginDataType, APIError } from "@common/axios";
 import { saveToken, saveUserID } from "global/SecureStore";
+import { useUserStore } from "global/UserData/useUserStore";
 
 const useLoginViewModel = (): LoginViewModel => {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const { setUser } = useUserStore();
+  // MARK: - States
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [shouldShowError, setShouldShowError] = useState<boolean>(false);
 
   const handleSignIn = async () => {
     setShouldShowError(false);
+
     if (!email || !password) {
       setShouldShowError(true);
       return;
     }
+
     await loginUser(email, password, onError, onSuccess);
-    return;
   };
 
   const onError = (e: APIError) => {
@@ -28,6 +32,9 @@ const useLoginViewModel = (): LoginViewModel => {
   const onSuccess = (data: LoginDataType) => {
     saveToken(data.data.token);
     saveUserID(data.data.id);
+
+    
+
     navigation.reset({ index: 0, routes: [{ name: "BottomTab" }] });
   };
 
