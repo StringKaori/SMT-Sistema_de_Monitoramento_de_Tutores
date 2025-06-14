@@ -4,28 +4,12 @@ import { useThemeStore } from "app/theme/useThemeStore";
 import { TitleView } from "@common/components";
 import { MenuItem } from "./Helpers/MenuItem";
 import { AdminModule } from "./Helpers/AdminModule";
-import { useUserStore } from "global/UserData/useUserStore";
-import { removeToken, removeUserID } from "global/SecureStore";
-import { useNavigation } from "@react-navigation/native";
-import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
+import { useProfileViewModel } from "./useProfileViewModel";
 
 const ProfileScreen = () => {
   const { theme, width, height } = useThemeStore();
-  const { user } = useUserStore();
   const styles = createStyles(theme.colors, width, height);
-  const isAdmin = user?.authorities.includes("ROLE_ADMIN_USER");
-
-  // TODO: Viewmodel
-  const navigation = useNavigation<RootStackNavigationProp>();
-  const logOut = async () => {
-    try {
-      await removeToken();
-      await removeUserID();
-      navigation.reset({ index: 0, routes: [{ name: "LoginScreen" }] });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const viewModel = useProfileViewModel();
 
   return (
     <View style={styles.container}>
@@ -37,7 +21,7 @@ const ProfileScreen = () => {
           }}
         />
         <View style={styles.column}>
-          <Text style={styles.name}>{user?.username}</Text>
+          <Text style={styles.name}>{viewModel.user?.username}</Text>
           {/* TODO: falar pro tavos adicionar prontuário */}
           <Text style={styles.id}>BP304002X</Text>
 
@@ -47,11 +31,11 @@ const ProfileScreen = () => {
         </View>
       </View>
 
-      {isAdmin && <AdminModule />}
+      {viewModel.isAdmin && <AdminModule />}
 
       <TitleView title={"Account"} />
       <MenuItem title={"Reset Password"} />
-      <MenuItem title={"Log Out"} action={logOut} />
+      <MenuItem title={"Log Out"} action={viewModel.logOut} />
     </View>
   );
 };
