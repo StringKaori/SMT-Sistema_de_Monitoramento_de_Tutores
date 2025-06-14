@@ -3,20 +3,13 @@ import LogoSVG from "@assets/LogoSMT.svg";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
-import { useState } from "react";
 import { DefaultTextInput, PasswordTextInput } from "@common/components";
-
-type NavigationType = NativeStackNavigationProp<RootStackParamList>;
+import { useLoginViewModel } from "./useLoginViewModel";
 
 const LoginScreen = () => {
   const { theme } = useThemeStore();
   const styles = createStyles(theme.colors);
-  const navigation = useNavigation<NavigationType>();
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const viewModel = useLoginViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -24,25 +17,23 @@ const LoginScreen = () => {
       <Text style={styles.title}>Login</Text>
 
       <DefaultTextInput
-        value={email}
-        onChangeText={setEmail}
+        value={viewModel.email}
+        onChangeText={viewModel.setEmail}
         placeholder="Email"
         placeholderTextColor={theme.colors.secondaryText}
       />
 
       <PasswordTextInput
         secureTextEntry
-        value={password}
-        onChangeText={setPassword}
+        value={viewModel.password}
+        onChangeText={viewModel.setPassword}
         placeholder="Password"
         placeholderTextColor={theme.colors.secondaryText}
       />
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() =>
-          navigation.reset({ index: 0, routes: [{ name: "BottomTab" }] })
-        }
+        onPress={viewModel.handleSignIn}
       >
         <Text style={styles.buttonText}>Sign In</Text>
       </TouchableOpacity>

@@ -1,8 +1,5 @@
 import { ProfessorData } from "@common/types/ProfessorCardData";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
-import { useNavigation,  } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
