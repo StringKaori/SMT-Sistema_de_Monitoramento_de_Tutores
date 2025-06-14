@@ -30,11 +30,13 @@ const LoginScreen = () => {
         placeholder="Password"
         placeholderTextColor={theme.colors.secondaryText}
       />
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={viewModel.handleSignIn}
-      >
+      {/* TODO: create an custom error text component to make it responsive */}
+      {viewModel.shouldShowError && (
+        <Text style={{ color: `red`, paddingBottom: 10 }}>
+          Error, all fields must be filled
+        </Text>
+      )}
+      <TouchableOpacity style={styles.button} onPress={viewModel.handleSignIn}>
         <Text style={styles.buttonText}>Sign In</Text>
       </TouchableOpacity>
     </SafeAreaView>

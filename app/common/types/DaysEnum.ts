@@ -4,4 +4,5 @@ export enum DaysEnum {
   Wednesday = "Wednesday",
   Thursday = "Thursday",
   Friday = "Friday",
+  Saturday = "Saturday"
 }

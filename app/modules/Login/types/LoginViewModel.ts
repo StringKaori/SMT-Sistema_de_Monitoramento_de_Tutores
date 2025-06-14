@@ -5,5 +5,7 @@ export interface LoginViewModel {
     setEmail: StringOrUndefinedSetter,
     password: string | undefined,
     setPassword: StringOrUndefinedSetter,
+    shouldShowError: boolean,
+
     handleSignIn: () => void
 }

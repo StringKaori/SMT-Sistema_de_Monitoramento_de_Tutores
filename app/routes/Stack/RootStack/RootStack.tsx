@@ -7,13 +7,17 @@ import { ProfessorScreen } from "@modules/Professor/ProfessorScreen";
 import { LoginScreen } from "@modules/Login/LoginScreen";
 import { RoomsMoreInfo } from "@modules/Rooms/RoomsMoreInfo";
 
-const RootStack = () => {
+interface Props {
+  firstScreen: keyof RootStackParamList
+}
+
+const RootStack = (props: Props) => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { theme } = useThemeStore();
 
   return (
     <Stack.Navigator
-      initialRouteName="LoginScreen"
+      initialRouteName={props.firstScreen}
       screenOptions={{
         headerShown: false,
         headerStyle: {

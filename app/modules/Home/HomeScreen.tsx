@@ -2,7 +2,6 @@ import { HorizontalScroller, ProfessorCard } from "@common/components";
 import { DaysEnum } from "@common/types/DaysEnum";
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
 } from "react-native";
