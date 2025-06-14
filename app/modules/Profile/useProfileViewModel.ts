@@ -3,6 +3,7 @@ import { ProfileViewModel } from "./types/ProfileViewModel";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 import { removeToken, removeUserID } from "global/SecureStore";
+import { CRUDScreenData } from "@common/types/CRUDScreenData";
 
 const useProfileViewModel = (): ProfileViewModel => {
     const { user } = useUserStore();
@@ -19,11 +20,16 @@ const useProfileViewModel = (): ProfileViewModel => {
       }
     };
 
+    const navigateTo = (params: CRUDScreenData) => {
+        navigation.navigate("CRUDScreen", params)
+    }
+
     return {
         user,
         isAdmin,
-        
-        logOut
+
+        logOut,
+        navigateTo
     };
 }
 

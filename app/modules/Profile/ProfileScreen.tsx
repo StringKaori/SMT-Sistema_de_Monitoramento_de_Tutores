@@ -31,7 +31,7 @@ const ProfileScreen = () => {
         </View>
       </View>
 
-      {viewModel.isAdmin && <AdminModule />}
+      {viewModel.isAdmin && <AdminModule viewModel={viewModel}/>}
 
       <TitleView title={"Account"} />
       <MenuItem title={"Reset Password"} />
