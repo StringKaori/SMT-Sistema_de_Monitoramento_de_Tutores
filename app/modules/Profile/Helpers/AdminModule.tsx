@@ -9,7 +9,10 @@ interface Props {
 
 const AdminModule = (props: Props) => {
   const { viewModel } = props;
-  const model = Object.values(EntityTypes)
+  const model = Object.entries(EntityTypes).map(([key, value]) => ({
+    title: key,
+    entityType: value,
+  }));
 
   return (
     <View>
@@ -18,7 +21,7 @@ const AdminModule = (props: Props) => {
       {/* Just so it do the ScrollView for me */}
       <FlatList
         data={model}
-        renderItem={({ item }) => <MenuItem title={item} action={() => viewModel.navigateTo({entityType: item})}/>}
+        renderItem={({ item }) => <MenuItem title={item.title} action={() => viewModel.navigateTo({entityType: item.entityType})}/>}
       />
     </View>
   );

@@ -3,11 +3,11 @@ export type CRUDScreenData = {
 }
 
 export enum EntityTypes {
-    Professors = "Professors",
-    Classrooms = "Classrooms",
-    Events = "Events",
-    Courses = "Courses",
-    Users = "Users",
-    Subjects = "Subjects",
+    Classrooms = "classrooms",
+    Courses = "courses",
+    Disciplines = "disciplines",
+    Professors = "professors",
+    Events = "events",
+    User = "user",
   };
   
