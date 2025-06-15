@@ -23,7 +23,7 @@ const useLoginViewModel = (): LoginViewModel => {
       return;
     }
 
-    await loginUser(email, password, onError, onSuccess);
+    await loginUser(email.toLowerCase(), password, onError, onSuccess);
   };
 
   const onError = (e: APIError) => {

@@ -1,49 +1,59 @@
-import { SafeAreaView } from "react-native-safe-area-context";
 import LogoSVG from "@assets/LogoSMT.svg";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { DefaultTextInput, PasswordTextInput } from "@common/components";
 import { useLoginViewModel } from "./useLoginViewModel";
 
 const LoginScreen = () => {
-  const { theme } = useThemeStore();
-  const styles = createStyles(theme.colors);
+  const { theme, height } = useThemeStore();
+  const styles = createStyles(theme.colors, height);
   const viewModel = useLoginViewModel();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <LogoSVG />
-      <Text style={styles.title}>Login</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView style={styles.container} behavior={"padding"}>
+        <LogoSVG />
+        <Text style={styles.title}>Login</Text>
+        <DefaultTextInput
+          value={viewModel.email}
+          onChangeText={viewModel.setEmail}
+          placeholder="Email"
+          placeholderTextColor={theme.colors.secondaryText}
+        />
 
-      <DefaultTextInput
-        value={viewModel.email}
-        onChangeText={viewModel.setEmail}
-        placeholder="Email"
-        placeholderTextColor={theme.colors.secondaryText}
-      />
-
-      <PasswordTextInput
-        secureTextEntry
-        value={viewModel.password}
-        onChangeText={viewModel.setPassword}
-        placeholder="Password"
-        placeholderTextColor={theme.colors.secondaryText}
-      />
-      {/* TODO: create an custom error text component to make it responsive */}
-      {viewModel.shouldShowError && (
-        <Text style={{ color: `red`, paddingBottom: 10 }}>
-          Error, all fields must be filled
-        </Text>
-      )}
-      <TouchableOpacity style={styles.button} onPress={viewModel.handleSignIn}>
-        <Text style={styles.buttonText}>Sign In</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+        <PasswordTextInput
+          secureTextEntry
+          value={viewModel.password}
+          onChangeText={viewModel.setPassword}
+          placeholder="Password"
+          placeholderTextColor={theme.colors.secondaryText}
+        />
+        {/* TODO: create an custom error text component to make it responsive */}
+        {viewModel.shouldShowError && (
+          <Text style={{ color: `red`, paddingBottom: 10 }}>
+            Error, all fields must be filled
+          </Text>
+        )}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={viewModel.handleSignIn}
+        >
+          <Text style={styles.buttonText}>Sign In</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
-const createStyles = (colors: ThemeColors) =>
+const createStyles = (colors: ThemeColors, height: number) =>
   StyleSheet.create({
     container: {
       flex: 1,
