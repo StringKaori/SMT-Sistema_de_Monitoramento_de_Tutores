@@ -1,10 +1,11 @@
 import { CRUDScreenData, EntityTypes } from "@common/types/CRUDScreenData";
-import { RouteProp } from "@react-navigation/native";
+import { RouteProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { CRUDItem } from "../Helpers/CRUDItem";
+import { CRUDItem } from "../../Helpers/CRUDItem";
+import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "CRUDScreen">;
@@ -14,13 +15,20 @@ const CRUDScreen = ({ route }: Prop) => {
   const { theme, height } = useThemeStore();
   const styles = createStyles(theme.colors, height);
   const data: CRUDScreenData = route.params;
+
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const navigateToForm = (isEditing: boolean) => {
+    navigation.navigate('DefaultForm', {isEditing: isEditing, entityType: data.entityType})
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{data.entityType}</Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigateToForm(false)}>
         <Text style={styles.buttonText}>Add New</Text>
       </TouchableOpacity>
-      {/* TODO: Transformar em flatlist assim q tiver o get implementado */}
+      {/* TODO: Transformar em flatlist genérica
+          assim q tiver o get implementado */}
       <CRUDItem title={"Rafael Muniz"}/>
     </View>
   );

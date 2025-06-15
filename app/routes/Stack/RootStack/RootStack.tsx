@@ -6,10 +6,11 @@ import { BottomTab } from "@routes/Tab/BottomTab/BottomTab";
 import { ProfessorScreen } from "@modules/Professor/ProfessorScreen";
 import { LoginScreen } from "@modules/Login/LoginScreen";
 import { RoomsMoreInfo } from "@modules/Rooms/RoomsMoreInfo";
-import { CRUDScreen } from "@modules/Profile/modules/CRUDScreen";
+import { CRUDScreen } from "@modules/Profile/modules/CRUD/CRUDScreen";
+import { DefaultForm } from "@modules/Profile/modules/CRUD/components/DefaultForm";
 
 interface Props {
-  firstScreen: keyof RootStackParamList
+  firstScreen: keyof RootStackParamList;
 }
 
 const RootStack = (props: Props) => {
@@ -20,29 +21,30 @@ const RootStack = (props: Props) => {
     <Stack.Navigator
       initialRouteName={props.firstScreen}
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTitle: ``,
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },
-        headerTintColor: theme.colors.highlightedText
+        headerTintColor: theme.colors.highlightedText,
       }}
     >
-      <Stack.Screen name={"LoginScreen"} component={LoginScreen} />
-      <Stack.Screen name={"BottomTab"} component={BottomTab} />
       <Stack.Screen
-        name={"ProfessorScreen"}
-        component={ProfessorScreen}
-        options={{ headerShown: true, headerTitle: '' }}
+        name={"LoginScreen"}
+        component={LoginScreen}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
-        name={"RoomsMoreInfoScreen"}
-        component={RoomsMoreInfo}
-        options={{ headerShown: true, headerTitle: '' }}/>
+        name={"BottomTab"}
+        component={BottomTab}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name={"ProfessorScreen"} component={ProfessorScreen} />
+      <Stack.Screen name={"RoomsMoreInfoScreen"} component={RoomsMoreInfo} />
 
-      <Stack.Screen
-        name={"CRUDScreen"}
-        component={CRUDScreen}
-        options={{ headerShown: true, headerTitle: '' }}/>
+      <Stack.Screen name={"CRUDScreen"} component={CRUDScreen} />
+
+      <Stack.Screen name={"DefaultForm"} component={DefaultForm} />
     </Stack.Navigator>
   );
 };

@@ -3,5 +3,5 @@ export interface CustomTextInputProps {
     secureTextEntry?: boolean;
     onChangeText: React.Dispatch<React.SetStateAction<string | undefined>>;
     placeholder: string;
-    placeholderTextColor: string;
+    placeholderTextColor?: string;
 }

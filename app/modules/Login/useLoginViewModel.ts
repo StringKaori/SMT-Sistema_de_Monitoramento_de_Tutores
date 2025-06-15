@@ -6,6 +6,7 @@ import { loginUser, LoginDataType, APIError } from "@common/axios";
 import { saveToken, saveUserID } from "global/SecureStore";
 import { useUserStore } from "global/UserData/useUserStore";
 import { User } from "@common/types/User";
+import { updateConnectorToken } from "@common/axios/connector";
 
 const useLoginViewModel = (): LoginViewModel => {
   const navigation = useNavigation<RootStackNavigationProp>();
@@ -34,7 +35,8 @@ const useLoginViewModel = (): LoginViewModel => {
     saveToken(data.data.token);
     saveUserID(data.data.id);
 
-    setUser(data.data as User)
+    setUser(data.data as User);
+    updateConnectorToken(data.data.token);
 
     navigation.reset({ index: 0, routes: [{ name: "BottomTab" }] });
   };
