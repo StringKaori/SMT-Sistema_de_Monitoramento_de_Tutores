@@ -6,7 +6,7 @@ import { BottomTab } from "@routes/Tab/BottomTab/BottomTab";
 import { ProfessorScreen } from "@modules/Professor/ProfessorScreen";
 import { LoginScreen } from "@modules/Login/LoginScreen";
 import { RoomsMoreInfo } from "@modules/Rooms/RoomsMoreInfo";
-import { CRUDScreen } from "@modules/Profile/Helpers/CRUDScreen";
+import { CRUDScreen } from "@modules/Profile/modules/CRUDScreen";
 
 interface Props {
   firstScreen: keyof RootStackParamList

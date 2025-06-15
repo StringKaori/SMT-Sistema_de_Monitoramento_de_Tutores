@@ -10,7 +10,7 @@ import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { TitleView } from "@common/components";
 import { MenuItem } from "./Helpers/MenuItem";
-import { AdminModule } from "./Helpers/AdminModule";
+import { AdminModule } from "./modules/AdminModule";
 import { useProfileViewModel } from "./useProfileViewModel";
 
 const ProfileScreen = () => {
@@ -41,7 +41,7 @@ const ProfileScreen = () => {
         {viewModel.isAdmin && <AdminModule viewModel={viewModel} />}
 
         <TitleView title={"Account"} />
-        <MenuItem title={"Reset Password"} />
+        <MenuItem title={"Reset Password"} action={()=>{}}/>
         <MenuItem title={"Log Out"} action={viewModel.logOut} />
       </ScrollView>
     </View>

@@ -1,5 +1,5 @@
 import { TitleView } from "@common/components";
-import { MenuItem } from "./MenuItem";
+import { MenuItem } from "../Helpers/MenuItem";
 import { FlatList, View } from "react-native";
 import { ProfileViewModel } from "../types/ProfileViewModel";
 import { EntityTypes } from "@common/types/CRUDScreenData";

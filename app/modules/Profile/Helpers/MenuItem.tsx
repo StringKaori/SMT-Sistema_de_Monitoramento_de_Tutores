@@ -4,8 +4,7 @@ import { useThemeStore } from "app/theme/useThemeStore";
 
 interface Props {
   title: string;
-  // TODO: remover o opcional uma vez que tudo estiver funcional
-  action?: () => void;
+  action: () => void;
 }
 
 const MenuItem = (props: Props) => {
