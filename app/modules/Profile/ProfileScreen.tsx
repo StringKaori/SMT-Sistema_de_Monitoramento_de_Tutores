@@ -1,4 +1,11 @@
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { TitleView } from "@common/components";
@@ -30,12 +37,13 @@ const ProfileScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {viewModel.isAdmin && <AdminModule viewModel={viewModel} />}
 
-      {viewModel.isAdmin && <AdminModule viewModel={viewModel}/>}
-
-      <TitleView title={"Account"} />
-      <MenuItem title={"Reset Password"} />
-      <MenuItem title={"Log Out"} action={viewModel.logOut} />
+        <TitleView title={"Account"} />
+        <MenuItem title={"Reset Password"} />
+        <MenuItem title={"Log Out"} action={viewModel.logOut} />
+      </ScrollView>
     </View>
   );
 };

@@ -17,9 +17,8 @@ const AdminModule = (props: Props) => {
   return (
     <View>
       <TitleView title={"Admin"} />
-
-      {/* Just so it do the ScrollView for me */}
       <FlatList
+        scrollEnabled={false}
         data={model}
         renderItem={({ item }) => <MenuItem title={item.title} action={() => viewModel.navigateTo({entityType: item.entityType})}/>}
       />
