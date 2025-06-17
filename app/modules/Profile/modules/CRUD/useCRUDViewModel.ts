@@ -8,6 +8,7 @@ import { CRUDViewModel } from "./types/CRUDViewModel";
 
 const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
   const [apiData, setApiData] = useState<any>();
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const navigation = useNavigation<RootStackNavigationProp>();
   const navigateToForm = (isEditing: boolean) => {
@@ -49,6 +50,9 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
 
   return {
     apiData,
+    modalVisible,
+    setModalVisible,
+
     navigateToForm,
   };
 };

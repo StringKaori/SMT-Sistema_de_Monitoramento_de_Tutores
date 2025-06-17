@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { CRUDItem } from "../../Helpers/CRUDItem";
 import { useCRUDViewModel } from "./useCRUDViewModel";
+import { DeleteModal } from "./components/DeleteModal/DeleteModal";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "CRUDScreen">;
@@ -33,7 +34,18 @@ const CRUDScreen = ({ route }: Prop) => {
 
       <FlatList
         data={viewModel.apiData}
-        renderItem={({ item }) => <CRUDItem title={item.name || item.fullName} />}
+        renderItem={({ item }) => (
+          <CRUDItem
+            title={item.name || item.fullName}
+            showModal={viewModel.setModalVisible}
+          />
+        )}
+      />
+
+      <DeleteModal
+        visible={viewModel.modalVisible}
+        onClose={() => viewModel.setModalVisible(false)}
+        onConfirm={() => console.log("adffadfadfadadfafadf")}
       />
     </View>
   );

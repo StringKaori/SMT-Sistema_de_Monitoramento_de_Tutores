@@ -29,8 +29,10 @@ const useUserFormViewModel = (): UserFormViewModel => {
   return {
     fullName,
     setFullName,
+
     email,
     setEmail,
+
     showError,
     handlePress,
     onError,

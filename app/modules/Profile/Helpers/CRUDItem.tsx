@@ -2,13 +2,15 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import EditSVG from "@assets/edit_icon.svg";
 import DeleteSVG from "@assets/delete_icon.svg";
 import { useThemeStore } from "app/theme/useThemeStore";
+import { BooleanSetter } from "@common/types/SetStateType";
 
 interface Props {
   title: string;
+  showModal: BooleanSetter;
 }
 
 const CRUDItem = (props: Props) => {
-  const { title } = props;
+  const { title, showModal } = props;
   const { theme, height, width } = useThemeStore();
   const styles = createStyles(theme.colors.secondaryText, height, width);
   return (
@@ -24,7 +26,7 @@ const CRUDItem = (props: Props) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => console.log("delete")}
+          onPress={() => showModal(true)}
         >
           <DeleteSVG />
         </TouchableOpacity>
