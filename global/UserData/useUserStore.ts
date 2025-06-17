@@ -1,14 +1,14 @@
-import { User } from '@common/types/User';
+import { LoginUser } from '@common/types/User';
 import { create } from 'zustand';
 
 interface UserState {
-    user: User | undefined,
-    setUser: (user: User) => void
+    user: LoginUser | undefined,
+    setUser: (user: LoginUser) => void
 };
 
 const useUserStore = create<UserState>((set) => ({
     user: undefined,
-    setUser: (user: User) => {set({user: user})}
+    setUser: (user: LoginUser) => {set({user: user})}
 }));
 
 export { useUserStore };

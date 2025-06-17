@@ -1,7 +1,18 @@
-import { UserDataType } from "@common/axios/types/UserDataType";
 import { APIError } from "@common/axios/types/APIError";
 import { connector } from "@common/axios/connector";
 import axios from "axios";
+import { UserDataType } from "@common/axios/types/UserDataType";
+
+const endpoint = "/admin/users";
+
+const defaultErrorAction = (e: unknown, onError: (data: APIError) => void) => {
+  if (axios.isAxiosError(e) && e.response?.data) {
+    const apiError = e.response.data as APIError;
+    onError(apiError);
+    return;
+  }
+  console.error(e);
+};
 
 const createUser = async (
   fullName: string,
@@ -10,16 +21,22 @@ const createUser = async (
   onSuccess: () => void
 ) => {
   try {
-    await connector.post("/admin/users", { fullName, email });
+    await connector.post(endpoint, { fullName, email });
     onSuccess();
   } catch (e) {
-    if (axios.isAxiosError(e) && e.response?.data) {
-      const apiError = e.response.data as APIError;
-      onError(apiError);
-      return;
-    }
-    console.error(e);
+    defaultErrorAction(e, onError);
   }
 };
 
-export { createUser };
+const getUsersList = async (
+  onError: (data: APIError) => void
+) => {
+  try {
+    const response = await connector.get(endpoint)
+    return response.data as UserDataType
+  } catch (e) {
+    defaultErrorAction(e, onError);
+  }
+};
+
+export { createUser, getUsersList };

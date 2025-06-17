@@ -1,4 +1,10 @@
-import { User } from "@common/types/User";
+import { LoginUser, User } from "@common/types/User";
+
+export interface LoginUserDataType {
+    "status": string,
+    "message": string,
+    "data": LoginUser
+}
 
 export interface UserDataType {
     "status": string,
