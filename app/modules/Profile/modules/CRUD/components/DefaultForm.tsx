@@ -5,7 +5,7 @@ import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParam
 import { useThemeStore } from "app/theme/useThemeStore";
 import { JSX } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { UserForm } from "./UserForm";
+import { UserForm } from "./UserForm/UserForm";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "DefaultForm">;

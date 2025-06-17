@@ -11,17 +11,10 @@ const createUser = async (
 ) => {
   try {
     await connector.post("/admin/users", { fullName, email });
-    
-    console.log("header token na users: ");
-    console.log(connector.defaults.headers['Authorization']);
-    
     onSuccess();
   } catch (e) {
     if (axios.isAxiosError(e) && e.response?.data) {
       const apiError = e.response.data as APIError;
-      
-    console.log("header token na users: ");
-    console.log(connector.defaults.headers['x-access-token']);
       onError(apiError);
       return;
     }

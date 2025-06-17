@@ -28,7 +28,7 @@ const useLoginViewModel = (): LoginViewModel => {
   };
 
   const onError = (e: APIError) => {
-    console.log(e.message);
+    console.error(e.message);
   };
 
   const onSuccess = (data: LoginDataType) => {

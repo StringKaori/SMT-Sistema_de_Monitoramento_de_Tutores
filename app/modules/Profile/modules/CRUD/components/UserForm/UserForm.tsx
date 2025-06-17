@@ -3,7 +3,7 @@ import { useThemeStore } from "app/theme/useThemeStore";
 import { useState } from "react";
 import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { SubmitFormButton } from "./SubmitFormButton";
+import { SubmitFormButton } from "../SubmitFormButton";
 import { createUser } from "@common/axios/admin/users/users";
 import { APIError } from "@common/axios";
 
@@ -26,7 +26,7 @@ const UserForm = () => {
   };
 
   const onError = (e: APIError) => {
-    console.log(e.message);
+    console.error(e.message);
   };
 
   const onSuccess = () => {
