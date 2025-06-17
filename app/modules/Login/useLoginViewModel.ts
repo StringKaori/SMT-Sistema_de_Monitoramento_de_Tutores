@@ -2,10 +2,10 @@ import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 import { LoginViewModel } from "./types/LoginViewModel";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { loginUser, LoginDataType, APIError } from "@common/axios";
+import { loginUser, LoginUserDataType, APIError } from "@common/axios";
 import { saveToken, saveUserID } from "global/SecureStore";
 import { useUserStore } from "global/UserData/useUserStore";
-import { User } from "@common/types/User";
+import { LoginUser, User } from "@common/types/User";
 import { updateConnectorToken } from "@common/axios/connector";
 
 const useLoginViewModel = (): LoginViewModel => {
@@ -31,11 +31,11 @@ const useLoginViewModel = (): LoginViewModel => {
     console.error(e.message);
   };
 
-  const onSuccess = (data: LoginDataType) => {
+  const onSuccess = (data: LoginUserDataType) => {
     saveToken(data.data.token);
     saveUserID(data.data.id);
 
-    setUser(data.data as User);
+    setUser(data.data as LoginUser);
     updateConnectorToken(data.data.token);
 
     navigation.reset({ index: 0, routes: [{ name: "BottomTab" }] });

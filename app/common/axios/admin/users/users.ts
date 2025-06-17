@@ -29,11 +29,12 @@ const createUser = async (
 };
 
 const getUsersList = async (
-  onError: (data: APIError) => void
+  onError: (data: APIError) => void,
+  onSuccess: (data: UserDataType) => void
 ) => {
   try {
     const response = await connector.get(endpoint)
-    return response.data as UserDataType
+    onSuccess(response.data as UserDataType);
   } catch (e) {
     defaultErrorAction(e, onError);
   }
