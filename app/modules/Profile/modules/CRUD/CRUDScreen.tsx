@@ -1,5 +1,4 @@
-import { CRUDScreenData, EntityTypes } from "@common/types/CRUDScreenData";
-import { RouteProp, useNavigation } from "@react-navigation/native";
+import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
@@ -11,11 +10,7 @@ import {
   FlatList,
 } from "react-native";
 import { CRUDItem } from "../../Helpers/CRUDItem";
-import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
-import { getUsersList } from "@common/axios/admin/users/users";
-import { APIError } from "@common/axios";
-import { UserDataType } from "@common/axios/types/UserDataType";
-import { useEffect, useState } from "react";
+import { useCRUDViewModel } from "./useCRUDViewModel";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "CRUDScreen">;
@@ -24,61 +19,20 @@ interface Prop {
 const CRUDScreen = ({ route }: Prop) => {
   const { theme, height } = useThemeStore();
   const styles = createStyles(theme.colors, height);
-  const routeData: CRUDScreenData = route.params;
-  const [apiData, setApiData] = useState<any>();
-
-  const navigation = useNavigation<RootStackNavigationProp>();
-  const navigateToForm = (isEditing: boolean) => {
-    navigation.navigate("DefaultForm", {
-      isEditing: isEditing,
-      entityType: routeData.entityType,
-    });
-  };
-
-  const entityGetMap: Record<
-    EntityTypes,
-    (onError: (e: APIError) => void, onSuccess: (data: any) => void) => void
-  > = {
-    [EntityTypes.Classrooms]: () => {},
-    [EntityTypes.Courses]: () => {},
-    [EntityTypes.Disciplines]: () => {},
-    [EntityTypes.Events]: () => {},
-    [EntityTypes.Professors]: () => {},
-    [EntityTypes.User]: async (onError, onSuccess) => {
-      const data = await getUsersList(onError, onSuccess);
-    },
-  };
-
-  const onError = (e: APIError) => {
-    console.error(e.message);
-  };
-
-  const onSuccess = (data: any) => {
-    setApiData(data);
-  };
-
-  useEffect(() => {
-    const loadData = async () => {
-      await entityGetMap[routeData.entityType](onError, onSuccess);
-    };
-
-    loadData();
-  }, []);
+  const viewModel = useCRUDViewModel(route.params);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{routeData.entityType}</Text>
+      <Text style={styles.title}>{route.params.entityType}</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigateToForm(false)}
+        onPress={() => viewModel.navigateToForm(false)}
       >
         <Text style={styles.buttonText}>Add New</Text>
       </TouchableOpacity>
-      {/* TODO: Transformar em flatlist genérica
-          assim q tiver o get implementado */}
 
       <FlatList
-        data={apiData}
+        data={viewModel.apiData}
         renderItem={({ item }) => <CRUDItem title={item.name || item.fullName} />}
       />
     </View>
