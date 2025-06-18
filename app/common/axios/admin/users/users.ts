@@ -40,4 +40,16 @@ const getUsersList = async (
   }
 };
 
-export { createUser, getUsersList };
+const deleteUser = async (
+  id: string,
+  onError: (e: APIError) => void
+) => {
+  try {
+    const response = await connector.delete(`${endpoint}/${id}`)
+    return response.data.message;
+  } catch (e) {
+    defaultErrorAction(e, onError);
+  }
+};
+
+export { createUser, getUsersList, deleteUser };

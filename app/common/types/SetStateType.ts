@@ -8,3 +8,5 @@ export type BooleanOrUndefinedSetter  = Dispatch<SetStateAction<boolean | undefi
 
 export type NumberSetter  = Dispatch<SetStateAction<number>>;
 export type NumberOrUndefinedSetter  = Dispatch<SetStateAction<number | undefined>>;
+
+export type AnySetter  = Dispatch<SetStateAction<any>>;

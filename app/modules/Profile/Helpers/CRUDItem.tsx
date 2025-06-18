@@ -2,20 +2,27 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import EditSVG from "@assets/edit_icon.svg";
 import DeleteSVG from "@assets/delete_icon.svg";
 import { useThemeStore } from "app/theme/useThemeStore";
-import { BooleanSetter } from "@common/types/SetStateType";
+import { AnySetter, BooleanSetter } from "@common/types/SetStateType";
 
 interface Props {
-  title: string;
+  item: any;
   showModal: BooleanSetter;
+  setSelectedItem: AnySetter;
 }
 
 const CRUDItem = (props: Props) => {
-  const { title, showModal } = props;
+  const { item, showModal, setSelectedItem } = props;
   const { theme, height, width } = useThemeStore();
   const styles = createStyles(theme.colors.secondaryText, height, width);
+
+  const didPressDelete = () => {
+    showModal(true)
+    setSelectedItem(item)
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>{item.name || item.fullName}</Text>
       <View style={styles.iconsView}>
         <TouchableOpacity
           style={styles.button}
@@ -26,7 +33,7 @@ const CRUDItem = (props: Props) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => showModal(true)}
+          onPress={didPressDelete}
         >
           <DeleteSVG />
         </TouchableOpacity>
@@ -47,6 +54,7 @@ const createStyles = (textColor: string, height: number, width: number) =>
     text: {
       color: textColor,
       fontSize: height * 0.022,
+      maxWidth: `75%`,
       fontWeight: "bold",
     },
     iconsView: {

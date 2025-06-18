@@ -36,8 +36,9 @@ const CRUDScreen = ({ route }: Prop) => {
         data={viewModel.apiData}
         renderItem={({ item }) => (
           <CRUDItem
-            title={item.name || item.fullName}
+            item={item}
             showModal={viewModel.setModalVisible}
+            setSelectedItem={viewModel.setSelectedItem}
           />
         )}
       />
@@ -45,7 +46,7 @@ const CRUDScreen = ({ route }: Prop) => {
       <DeleteModal
         visible={viewModel.modalVisible}
         onClose={() => viewModel.setModalVisible(false)}
-        onConfirm={() => console.log("adffadfadfadadfafadf")}
+        onConfirm={viewModel.onDeleteItem}
       />
     </View>
   );

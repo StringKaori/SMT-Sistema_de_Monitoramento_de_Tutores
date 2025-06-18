@@ -1,5 +1,5 @@
 import { APIError } from "@common/axios";
-import { getUsersList } from "@common/axios/admin/users/users";
+import { deleteUser, getUsersList } from "@common/axios/admin/users/users";
 import { CRUDScreenData, EntityTypes } from "@common/types/CRUDScreenData";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 import { useNavigation } from "@react-navigation/native";
@@ -9,6 +9,7 @@ import { CRUDViewModel } from "./types/CRUDViewModel";
 const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
   const [apiData, setApiData] = useState<any>();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<any>();
 
   const navigation = useNavigation<RootStackNavigationProp>();
   const navigateToForm = (isEditing: boolean) => {
@@ -20,15 +21,32 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
 
   const entityGetMap: Record<
     EntityTypes,
-    (onError: (e: APIError) => void, onSuccess: (data: any) => void) => void
+    {
+      get: (
+        onError: (e: APIError) => void,
+        onSuccess: (data: any) => void
+      ) => void;
+      delete: (
+        id: string,
+        onError: (e: APIError) => void
+      ) => any;
+    }
   > = {
     [EntityTypes.Classrooms]: () => {},
     [EntityTypes.Courses]: () => {},
     [EntityTypes.Disciplines]: () => {},
     [EntityTypes.Events]: () => {},
-    [EntityTypes.Professors]: () => {},
-    [EntityTypes.User]: async (onError, onSuccess) => {
-      await getUsersList(onError, onSuccess);
+    [EntityTypes.Professors]: () => {
+      get: {
+      }
+    },
+    [EntityTypes.User]: {
+      get: async (onError, onSuccess) => {
+        await getUsersList(onError, onSuccess);
+      },
+      delete: async (id, onError) => {
+        await deleteUser(id, onError);
+      }
     },
   };
 
@@ -40,9 +58,14 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
     setApiData(data);
   };
 
+  const onDeleteItem = async () => {
+    setModalVisible(false);
+    await entityGetMap[routeData.entityType]["delete"](selectedItem.id, onError);
+  }
+
   useEffect(() => {
     const loadData = async () => {
-      await entityGetMap[routeData.entityType](onError, onSuccess);
+      await entityGetMap[routeData.entityType]["get"](onError, onSuccess);
     };
 
     loadData();
@@ -53,7 +76,11 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
     modalVisible,
     setModalVisible,
 
+    selectedItem,
+    setSelectedItem,
+
     navigateToForm,
+    onDeleteItem
   };
 };
 
