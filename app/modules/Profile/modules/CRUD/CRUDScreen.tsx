@@ -39,6 +39,7 @@ const CRUDScreen = ({ route }: Prop) => {
             item={item}
             showModal={viewModel.setModalVisible}
             setSelectedItem={viewModel.setSelectedItem}
+            didPressEdit={viewModel.didPressEdit}
           />
         )}
       />

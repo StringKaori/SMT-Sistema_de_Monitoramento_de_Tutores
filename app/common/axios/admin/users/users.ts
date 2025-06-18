@@ -52,4 +52,18 @@ const deleteUser = async (
   }
 };
 
-export { createUser, getUsersList, deleteUser };
+const updateUser = async (
+  id: string,
+  fullName: string,
+  email: string,
+  onError: (e: APIError) => void
+) => {
+  try {
+    await connector.put(`${endpoint}/${id}`, { fullName, email })
+    return "User successfully updated!";
+  } catch (e) {
+    defaultErrorAction(e, onError);
+  }
+};
+
+export { createUser, getUsersList, deleteUser, updateUser };

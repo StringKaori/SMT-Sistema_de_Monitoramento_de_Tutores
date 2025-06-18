@@ -6,6 +6,7 @@ import { useThemeStore } from "app/theme/useThemeStore";
 import { JSX } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { UserForm } from "./UserForm/UserForm";
+import { User } from "@common/types/User";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "DefaultForm">;
@@ -20,7 +21,7 @@ const DefaultForm = ({ route }: Prop) => {
     [EntityTypes.Disciplines]: <></>,
     [EntityTypes.Events]: <></>,
     [EntityTypes.Professors]: <></>,
-    [EntityTypes.User]: <UserForm />,
+    [EntityTypes.User]: <UserForm isEditing={data.isEditing} item={data.item as User}/>,
   };
 
   const getFormInputs = () => {
@@ -35,7 +36,7 @@ const DefaultForm = ({ route }: Prop) => {
   );
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Add New {data.entityType}</Text>
+      <Text style={styles.title}>{data.isEditing ? "Edit" : "Add New"} {data.entityType}</Text>
       {getFormInputs()}
     </View>
   );

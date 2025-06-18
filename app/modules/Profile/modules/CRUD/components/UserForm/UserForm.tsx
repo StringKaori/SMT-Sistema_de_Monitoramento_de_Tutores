@@ -4,11 +4,26 @@ import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SubmitFormButton } from "../SubmitFormButton";
 import { useUserFormViewModel } from "./useUserFormViewModel";
+import { User } from "@common/types/User";
+import { useEffect } from "react";
 
-const UserForm = () => {
+interface Props {
+  item?: User;
+  isEditing?: boolean;
+}
+
+const UserForm = (props: Props) => {
+  const {item, isEditing} = props;
   const { theme } = useThemeStore();
   const styles = createStyles(theme.colors.background);
-  const viewModel = useUserFormViewModel();
+  const viewModel = useUserFormViewModel(item, isEditing);
+
+  useEffect(()=> {
+    if(item) {
+      viewModel.setEmail(item.email)
+      viewModel.setFullName(item.fullName)
+    }
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,8 +43,8 @@ const UserForm = () => {
           Error, all fields must be filled
         </Text>
       )}
-
-      <SubmitFormButton title={"Create"} handlePress={viewModel.handlePress} />
+      {/* TODO: Revisar para não repetir o isEditing ? "Update" : "Create"*/}
+      <SubmitFormButton title={isEditing ? "Update" : "Create"} handlePress={viewModel.handlePress} />
     </SafeAreaView>
   );
 };

@@ -10,6 +10,7 @@ export interface CRUDViewModel {
     setModalVisible: BooleanSetter,
 
     onDeleteItem: () => void,
+    didPressEdit: (item: any) => void,
     
     navigateToForm: (isEditing: boolean) => void,
 }

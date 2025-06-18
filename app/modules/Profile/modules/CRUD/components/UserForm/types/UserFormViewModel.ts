@@ -10,7 +10,7 @@ export interface UserFormViewModel {
 
     showError: boolean,
 
-    handlePress: () => void,
+    handlePress: (id?: string) => void,
     onError: (e: APIError) => void,
     onSuccess: () => void,
 }

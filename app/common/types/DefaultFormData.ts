@@ -2,5 +2,6 @@ import { EntityTypes } from "./CRUDScreenData"
 
 export type DefaultFormData = {
     isEditing: boolean,
-    entityType: EntityTypes
+    entityType: EntityTypes,
+    item?: any
 }

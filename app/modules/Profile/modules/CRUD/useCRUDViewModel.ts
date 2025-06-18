@@ -13,10 +13,12 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
   const [selectedItem, setSelectedItem] = useState<any>();
 
   const navigation = useNavigation<RootStackNavigationProp>();
-  const navigateToForm = (isEditing: boolean) => {
+
+  const navigateToForm = (isEditing: boolean, item?: any) => {
     navigation.navigate("DefaultForm", {
       isEditing: isEditing,
       entityType: routeData.entityType,
+      item: item
     });
   };
 
@@ -60,6 +62,10 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
     }, [])
   );
 
+  const didPressEdit = (item: any) => {
+    navigateToForm(true, item);
+  }
+
   return {
     apiData,
     modalVisible,
@@ -70,6 +76,7 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
 
     navigateToForm,
     onDeleteItem,
+    didPressEdit
   };
 };
 

@@ -8,10 +8,11 @@ interface Props {
   item: any;
   showModal: BooleanSetter;
   setSelectedItem: AnySetter;
+  didPressEdit: (item: any) => void;
 }
 
 const CRUDItem = (props: Props) => {
-  const { item, showModal, setSelectedItem } = props;
+  const { item, showModal, setSelectedItem, didPressEdit } = props;
   const { theme, height, width } = useThemeStore();
   const styles = createStyles(theme.colors.secondaryText, height, width);
 
@@ -26,7 +27,7 @@ const CRUDItem = (props: Props) => {
       <View style={styles.iconsView}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => console.log("edit")}
+          onPress={() => didPressEdit(item)}
         >
           <EditSVG/>
         </TouchableOpacity>

@@ -1,5 +1,5 @@
 export type CRUDScreenData = {
-    entityType: EntityTypes
+    entityType: EntityTypes,
 }
 
 export enum EntityTypes {

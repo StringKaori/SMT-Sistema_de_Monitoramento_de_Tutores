@@ -12,7 +12,7 @@ export type LoginUser = {
 export type User = {       
     fullName: string;
     email: string;
-    id: number;
+    id: string;
     authorities: Authorities[];
     enabled: boolean,
     credentialsNonExpired: boolean,

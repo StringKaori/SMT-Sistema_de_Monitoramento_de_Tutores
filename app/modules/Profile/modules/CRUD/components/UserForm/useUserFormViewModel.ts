@@ -1,12 +1,13 @@
 import { APIError } from "@common/axios";
-import { createUser } from "@common/axios/admin/users/users";
+import { createUser, updateUser } from "@common/axios/admin/users/users";
 import { useState } from "react";
 import { UserFormViewModel } from "./types/UserFormViewModel";
 import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
+import { User } from "@common/types/User";
 
-const useUserFormViewModel = (): UserFormViewModel => {
+const useUserFormViewModel = (item?: User, isEditing?: boolean): UserFormViewModel => {
   const [fullName, setFullName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [showError, setShowError] = useState<boolean>(false);
@@ -17,6 +18,12 @@ const useUserFormViewModel = (): UserFormViewModel => {
     if (!fullName || !email) {
       setShowError(true);
       return;
+    }
+
+    if (isEditing && item) {
+      await updateUser(item.id, fullName, email.toLowerCase(), onError);
+      onSuccess()
+      return
     }
 
     await createUser(fullName, email.toLowerCase(), onError, onSuccess);
@@ -34,7 +41,7 @@ const useUserFormViewModel = (): UserFormViewModel => {
     navigation.goBack();
     Toast.show({
       type: "success",
-      text1: "User create successfully!",
+      text1: isEditing ? "User updated successfully!" : "User created successfully!",
     });
   };
 
