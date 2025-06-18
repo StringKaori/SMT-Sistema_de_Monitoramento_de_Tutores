@@ -65,6 +65,7 @@ const createStyles = (colors: ThemeColors, width: number, height: number) =>
       color: colors.primaryText,
       fontWeight: "bold",
       fontSize: height * 0.025,
+      textAlign: `center`
     },
     id: {
       color: colors.primaryText,
@@ -92,6 +93,7 @@ const createStyles = (colors: ThemeColors, width: number, height: number) =>
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-evenly",
+      maxWidth: `50%`,
     },
   });
 
