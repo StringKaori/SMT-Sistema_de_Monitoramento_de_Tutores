@@ -57,7 +57,7 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
   useFocusEffect(
     useCallback(() => {
       loadData();
-    }, [loadData])
+    }, [])
   );
 
   return {
