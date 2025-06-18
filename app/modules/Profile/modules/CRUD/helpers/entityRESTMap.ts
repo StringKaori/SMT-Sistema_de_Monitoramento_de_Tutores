@@ -42,7 +42,7 @@ export const entityRESTMap: Record<
       await getUsersList(onError, onSuccess);
     },
     delete: async (id, onError) => {
-      await deleteUser(id, onError);
+      return await deleteUser(id, onError);
     },
   },
 };
