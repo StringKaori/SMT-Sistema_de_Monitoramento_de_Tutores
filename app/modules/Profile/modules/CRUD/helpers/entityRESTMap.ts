@@ -1,0 +1,48 @@
+import { APIError } from "@common/axios";
+import { deleteUser, getUsersList } from "@common/axios/admin/users/users";
+import { EntityTypes } from "@common/types/CRUDScreenData";
+
+export const entityRESTMap: Record<
+  EntityTypes,
+  {
+    get: (
+      onError: (e: APIError) => void,
+      onSuccess: (data: any) => void
+    ) => void;
+    delete: (id: string, onError: (e: APIError) => void) => any;
+  }
+> = {
+  [EntityTypes.Classrooms]: {
+    get: async (onError, onSuccess) => {},
+    delete: async (id, onError) => {},
+  },
+
+  [EntityTypes.Courses]: {
+    get: async (onError, onSuccess) => {},
+    delete: async (id, onError) => {},
+  },
+
+  [EntityTypes.Disciplines]: {
+    get: async (onError, onSuccess) => {},
+    delete: async (id, onError) => {},
+  },
+
+  [EntityTypes.Events]: {
+    get: async (onError, onSuccess) => {},
+    delete: async (id, onError) => {},
+  },
+
+  [EntityTypes.Professors]: {
+    get: async (onError, onSuccess) => {},
+    delete: async (id, onError) => {},
+  },
+
+  [EntityTypes.User]: {
+    get: async (onError, onSuccess) => {
+      await getUsersList(onError, onSuccess);
+    },
+    delete: async (id, onError) => {
+      await deleteUser(id, onError);
+    },
+  },
+};
