@@ -29,7 +29,8 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
   };
 
   const onSuccess = (data: any) => {
-    setApiData(data);
+    const filteredData = data.filter((i: { id: any; }) => i.id !== "684ddff87e78a2f37d190f12");
+    setApiData(filteredData);
   };
 
   const onDeleteItem = async () => {
