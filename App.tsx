@@ -9,6 +9,7 @@ import {
   getUserID,
 } from "global/SecureStore";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
+import Toast from "react-native-toast-message";
 
 export default function App() {
   const { width, height } = useWindowDimensions();
@@ -42,6 +43,7 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <RootStack firstScreen={firstScreen} />
+        <Toast />
       </NavigationContainer>
     </SafeAreaProvider>
   );

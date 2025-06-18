@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { CRUDViewModel } from "./types/CRUDViewModel";
 import { entityRESTMap } from "./helpers/entityRESTMap";
+import Toast from "react-native-toast-message";
 
 const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
   const [apiData, setApiData] = useState<any>();
@@ -21,6 +22,10 @@ const useCRUDViewModel = (routeData: CRUDScreenData): CRUDViewModel => {
 
   const onError = (e: APIError) => {
     console.error(e.message);
+    Toast.show({
+      type: "error",
+      text1: e.message,
+    });
   };
 
   const onSuccess = (data: any) => {
