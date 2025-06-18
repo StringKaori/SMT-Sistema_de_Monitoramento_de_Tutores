@@ -19,7 +19,7 @@ const useUserFormViewModel = (): UserFormViewModel => {
       return;
     }
 
-    await createUser(fullName, email, onError, onSuccess);
+    await createUser(fullName, email.toLowerCase(), onError, onSuccess);
   };
 
   const onError = (e: APIError) => {
