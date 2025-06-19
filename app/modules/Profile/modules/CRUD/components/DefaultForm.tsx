@@ -4,9 +4,11 @@ import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { JSX } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, KeyboardAvoidingView } from "react-native";
 import { UserForm } from "./UserForm/UserForm";
 import { User } from "@common/types/User";
+import { ClassroomForm } from "./ClassroomsForm/ClassroomsForm";
+import { Classrooms } from "@common/types/Classrooms";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "DefaultForm">;
@@ -15,17 +17,17 @@ interface Prop {
 const DefaultForm = ({ route }: Prop) => {
   const data: DefaultFormData = route.params;
 
-  const formInputMap: Record<EntityTypes, JSX.Element> = {
-    [EntityTypes.Classrooms]: <></>,
-    [EntityTypes.Courses]: <></>,
-    [EntityTypes.Disciplines]: <></>,
-    [EntityTypes.Events]: <></>,
-    [EntityTypes.Professors]: <></>,
-    [EntityTypes.User]: <UserForm isEditing={data.isEditing} item={data.item as User}/>,
+  const formInputMap: Record<EntityTypes, () => JSX.Element> = {
+    [EntityTypes.Classrooms]: () => <ClassroomForm isEditing={data.isEditing} item={data.item as Classrooms}/>,
+    [EntityTypes.Courses]: () => <></>,
+    [EntityTypes.Disciplines]: () => <></>,
+    [EntityTypes.Events]: () => <></>,
+    [EntityTypes.Professors]: () => <></>,
+    [EntityTypes.User]: () => <UserForm isEditing={data.isEditing} item={data.item as User}/>,
   };
 
   const getFormInputs = () => {
-    return formInputMap[data.entityType] || <></>;
+    return formInputMap[data.entityType]() || <></>;
   };
 
   const { theme, height } = useThemeStore();
@@ -35,10 +37,10 @@ const DefaultForm = ({ route }: Prop) => {
     height
   );
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text style={styles.title}>{data.isEditing ? "Edit" : "Add New"} {data.entityType}</Text>
       {getFormInputs()}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

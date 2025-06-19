@@ -3,7 +3,7 @@ import { StyleSheet, TextInput } from "react-native";
 import { CustomTextInputProps } from "../Types/TextInputProps";
 
 const DefaultTextInput = (props: CustomTextInputProps) => {
-  const { value, onChangeText, placeholder, placeholderTextColor, secureTextEntry } = props;
+  const { value, onChangeText, placeholder, placeholderTextColor, secureTextEntry, keyboardType } = props;
   const { theme, width } = useThemeStore();
   const styles = createStyles(theme.colors.outline, width);
   return (
@@ -14,6 +14,7 @@ const DefaultTextInput = (props: CustomTextInputProps) => {
       placeholderTextColor={placeholderTextColor}
       style={styles.input}
       secureTextEntry={secureTextEntry}
+      keyboardType={keyboardType}
     />
   );
 };

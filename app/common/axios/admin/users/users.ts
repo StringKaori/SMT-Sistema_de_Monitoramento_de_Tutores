@@ -1,18 +1,9 @@
 import { APIError } from "@common/axios/types/APIError";
 import { connector } from "@common/axios/connector";
-import axios from "axios";
 import { UserDataType } from "@common/axios/types/UserDataType";
+import { defaultErrorAction } from "@common/axios/defaultErrorAction";
 
 const endpoint = "/admin/users";
-
-const defaultErrorAction = (e: unknown, onError: (data: APIError) => void) => {
-  if (axios.isAxiosError(e) && e.response?.data) {
-    const apiError = e.response.data as APIError;
-    onError(apiError);
-    return;
-  }
-  console.error(e);
-};
 
 const createUser = async (
   fullName: string,

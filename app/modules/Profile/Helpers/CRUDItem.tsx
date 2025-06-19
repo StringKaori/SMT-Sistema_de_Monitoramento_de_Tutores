@@ -23,7 +23,7 @@ const CRUDItem = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{item.name || item.fullName}</Text>
+      <Text style={styles.text}>{item.name || item.fullName || item.description}</Text>
       <View style={styles.iconsView}>
         <TouchableOpacity
           style={styles.button}

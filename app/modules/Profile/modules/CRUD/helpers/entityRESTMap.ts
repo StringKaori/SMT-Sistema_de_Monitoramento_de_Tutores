@@ -1,4 +1,5 @@
 import { APIError } from "@common/axios";
+import { deleteClassroom, getClassroomsList } from "@common/axios/admin/classrooms/classrooms";
 import { deleteUser, getUsersList } from "@common/axios/admin/users/users";
 import { EntityTypes } from "@common/types/CRUDScreenData";
 
@@ -13,8 +14,12 @@ export const entityRESTMap: Record<
   }
 > = {
   [EntityTypes.Classrooms]: {
-    get: async (onError, onSuccess) => {},
-    delete: async (id, onError) => {},
+    get: async (onError, onSuccess) => {
+      await getClassroomsList(onError, onSuccess);
+    },
+    delete: async (id, onError) => {
+      return await deleteClassroom(id, onError);
+    },
   },
 
   [EntityTypes.Courses]: {
