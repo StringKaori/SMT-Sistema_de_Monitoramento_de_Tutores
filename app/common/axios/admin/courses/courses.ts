@@ -34,6 +34,7 @@ const getCoursesList = async (
   }
 };
 
+// TODO: Todos os DELETE e UPDATE podem ser genéricos e compartilhados.
 const deleteCourse = async (id: string, onError: (e: APIError) => void) => {
   try {
     const response = await connector.delete(`${endpoint}/${id}`);

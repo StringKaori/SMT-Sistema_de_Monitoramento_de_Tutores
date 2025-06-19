@@ -1,47 +1,32 @@
-import { useState } from "react";
-import { CourseViewModel } from "./types/CourseViewModel";
 import { APIError } from "@common/axios";
+import { useState } from "react";
 import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
-import { createCourse, updateCourse } from "@common/axios/admin/courses/courses";
-import { Course } from "@common/types/Course";
+import { ProfessorFormViewModel } from "./types/ProfessorFormViewModel";
+import { createProfessor, updateProfessor } from "@common/axios/admin/professors/professors";
+import { Professor } from "@common/types/Professor";
 
-const useCourseViewModel = (
-  item?: Course,
-  isEditing?: boolean
-): CourseViewModel => {
+const useProfessorFormViewModel = (item?: Professor, isEditing?: boolean): ProfessorFormViewModel => {
   const [name, setName] = useState<string>();
-  const [abbreviation, setAbbreviation] = useState<string>();
-
+  const [email, setEmail] = useState<string>();
   const [showError, setShowError] = useState<boolean>(false);
-
   const navigation = useNavigation<RootStackNavigationProp>();
 
   const handlePress = async () => {
     setShowError(false);
-    if (!name || !abbreviation) {
+    if (!name || !email) {
       setShowError(true);
       return;
     }
 
     if (isEditing && item) {
-      await updateCourse(
-        item.id,
-        name, 
-        abbreviation,
-        onError
-      );
-      onSuccess();
-      return;
+      await updateProfessor(item.id, name, email.toLowerCase(), onError);
+      onSuccess()
+      return
     }
 
-    await createCourse(
-      name,
-      abbreviation,
-      onError,
-      onSuccess
-    );
+    await createProfessor(name, email.toLowerCase(), onError, onSuccess);
   };
 
   const onError = (e: APIError) => {
@@ -56,9 +41,7 @@ const useCourseViewModel = (
     navigation.goBack();
     Toast.show({
       type: "success",
-      text1: isEditing
-        ? "Course updated successfully!"
-        : "Course created successfully!",
+      text1: isEditing ? "Professor updated successfully!" : "Professor created successfully!",
     });
   };
 
@@ -66,15 +49,14 @@ const useCourseViewModel = (
     name,
     setName,
 
-    abbreviation,
-    setAbbreviation,
+    email,
+    setEmail,
 
     showError,
-
     handlePress,
     onError,
     onSuccess,
   };
 };
 
-export { useCourseViewModel };
+export { useProfessorFormViewModel };
