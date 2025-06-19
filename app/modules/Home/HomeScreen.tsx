@@ -28,7 +28,6 @@ const HomeScreen = () => {
         data={viewModel.mockProfessors[viewModel.selectedDay ?? "Monday"]}
         numColumns={2}
         key={"ProfessorGridView"}
-        style={{ paddingTop: 20 }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <ProfessorCard data={item} navigation={viewModel.navigation} />}
       />

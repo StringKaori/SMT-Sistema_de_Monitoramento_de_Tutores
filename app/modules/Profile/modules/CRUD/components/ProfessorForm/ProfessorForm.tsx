@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { Professor } from "@common/types/Professor";
 
 interface Props {
-  item?: Professor;// TODO: trocar para professor
+  item?: Professor;
   isEditing?: boolean;
 }
 

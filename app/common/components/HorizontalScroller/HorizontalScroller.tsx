@@ -24,7 +24,7 @@ const HorizontalScroller = (props: Props) => {
   const styles = createStyles(height, width, theme.colors.outline);
 
   return (
-    <View style={{ height: height * 0.06 }}>
+    <View style={{ height: height * 0.07, paddingHorizontal: 6 }}>
       <FlatList
         showsHorizontalScrollIndicator={false}
         data={flatListData}
