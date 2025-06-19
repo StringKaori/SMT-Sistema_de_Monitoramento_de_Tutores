@@ -19,7 +19,6 @@ const RoomsScreen = () => {
         data={viewModel.mockRooms[viewModel.selectedFloor ?? "First"]}
         numColumns={2}
         key={"RoomGridView"}
-        style={{ paddingTop: 20 }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <RoomCard data={item} navigation={viewModel.navigation} />}
       />
