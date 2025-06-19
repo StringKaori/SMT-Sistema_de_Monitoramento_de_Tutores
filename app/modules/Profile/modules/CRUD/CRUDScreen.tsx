@@ -31,18 +31,23 @@ const CRUDScreen = ({ route }: Prop) => {
       >
         <Text style={styles.buttonText}>Add New</Text>
       </TouchableOpacity>
-
-      <FlatList
-        data={viewModel.apiData}
-        renderItem={({ item }) => (
-          <CRUDItem
-            item={item}
-            showModal={viewModel.setModalVisible}
-            setSelectedItem={viewModel.setSelectedItem}
-            didPressEdit={viewModel.didPressEdit}
-          />
-        )}
-      />
+      {viewModel.apiData && viewModel.apiData.length === 0 ? (
+        <Text style={{ paddingTop: 10 }}>
+          No {route.params.entityType} registered
+        </Text>
+      ) : (
+        <FlatList
+          data={viewModel.apiData}
+          renderItem={({ item }) => (
+            <CRUDItem
+              item={item}
+              showModal={viewModel.setModalVisible}
+              setSelectedItem={viewModel.setSelectedItem}
+              didPressEdit={viewModel.didPressEdit}
+            />
+          )}
+        />
+      )}
 
       <DeleteModal
         visible={viewModel.modalVisible}

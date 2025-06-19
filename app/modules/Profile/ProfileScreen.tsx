@@ -31,10 +31,6 @@ const ProfileScreen = () => {
           <Text style={styles.name}>{viewModel.user?.username}</Text>
           {/* TODO: falar pro tavos adicionar prontuário */}
           <Text style={styles.id}>BP304002X</Text>
-
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Edit Profile</Text>
-          </TouchableOpacity>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
