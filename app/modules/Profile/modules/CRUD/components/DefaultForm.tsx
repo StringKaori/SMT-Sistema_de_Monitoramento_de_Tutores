@@ -4,11 +4,14 @@ import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { JSX } from "react";
-import { Text, View, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { Text, StyleSheet, KeyboardAvoidingView } from "react-native";
+// TODO: melhorar esses imports
 import { UserForm } from "./UserForm/UserForm";
 import { User } from "@common/types/User";
 import { ClassroomForm } from "./ClassroomsForm/ClassroomsForm";
 import { Classrooms } from "@common/types/Classrooms";
+import { CourseForm } from "./CourseForm/CourseForm";
+import { Course } from "@common/types/Course";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "DefaultForm">;
@@ -19,7 +22,7 @@ const DefaultForm = ({ route }: Prop) => {
 
   const formInputMap: Record<EntityTypes, () => JSX.Element> = {
     [EntityTypes.Classrooms]: () => <ClassroomForm isEditing={data.isEditing} item={data.item as Classrooms}/>,
-    [EntityTypes.Courses]: () => <></>,
+    [EntityTypes.Courses]: () => <CourseForm isEditing={data.isEditing} item={data.item as Course} />,
     [EntityTypes.Disciplines]: () => <></>,
     [EntityTypes.Events]: () => <></>,
     [EntityTypes.Professors]: () => <></>,
