@@ -7,52 +7,98 @@ import {
   StyleSheet,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker"; //MARK: - uso de câmera aqui
-import { BooleanSetter, StringSetter } from "@common/types/SetStateType";
+import { BooleanSetter, StringOrUndefinedSetter } from "@common/types/SetStateType";
 
 interface Props {
   modalVisible: boolean;
   setModalVisible: BooleanSetter;
-  imageUri: string;
-  setImageUri: StringSetter;
+  imageBase64: string | undefined;
+  setImageBase64: StringOrUndefinedSetter;
 }
 
 const ProfileImageModal = (props: Props) => {
-  const { modalVisible, setModalVisible, imageUri, setImageUri } = props;
-  const openImagePicker = async () => {
-    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permission.granted) {
-      alert("Permission required to access gallery");
+  const { modalVisible, setModalVisible, imageBase64, setImageBase64 } = props;
+
+  const processImageResult = (result: ImagePicker.ImagePickerResult) => {
+    if (result.canceled || !result.assets || result.assets.length === 0) {
       return;
     }
 
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: "images",
-      quality: 1,
-    });
+    const asset = result.assets[0];
+    const { uri, base64 } = asset;
 
-    if (!result.canceled && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri);
-      setModalVisible(false);
+    if (!base64 || !uri) {
+      alert("Failed to load image");
+      return;
+    }
+
+    const extension = uri.split(".").pop()?.toLowerCase();
+    const validExtensions = ["jpeg", "jpg", "png", "webp"];
+
+    if (!extension || !validExtensions.includes(extension)) {
+      alert(
+        "Unsupported image format. Please select a JPEG, PNG, or WebP image."
+      );
+      return;
+    }
+
+    const mimeType = `image/${extension === "jpg" ? "jpeg" : extension}`;
+    const base64WithMime = `data:${mimeType};base64,${base64}`;
+
+    return base64WithMime;
+  };
+
+  const getImagePickerOptions = (): ImagePicker.ImagePickerOptions => ({
+    mediaTypes: "images",
+    quality: 0.5,
+    base64: true,
+    allowsEditing: true,
+  });
+
+  const openImagePicker = async () => {
+    try {
+      const permission =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permission.granted) {
+        alert("Permission required to access gallery");
+        return;
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync(
+        getImagePickerOptions()
+      );
+
+      const processedImage = processImageResult(result);
+      if (processedImage) {
+        setImageBase64(processedImage);
+        setModalVisible(false);
+      }
+    } catch (error) {
+      console.error("Error picking image:", error);
+      alert("An error occurred while selecting the image. Please try again.");
     }
   };
 
   const openCamera = async () => {
-    const permission = await ImagePicker.requestCameraPermissionsAsync();
-    if (!permission.granted) {
-      alert("Permission required to use camera");
-      return;
-    }
+    try {
+      const permission = await ImagePicker.requestCameraPermissionsAsync();
+      if (!permission.granted) {
+        alert("Permission required to use camera");
+        return;
+      }
 
-    const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: "images",
-      quality: 1,
-    });
+      const result = await ImagePicker.launchCameraAsync(
+        getImagePickerOptions()
+      );
 
-    if (!result.canceled && result.assets.length > 0) {
-      setImageUri(result.assets[0].uri);
-      setModalVisible(false);
-      
-      console.log(imageUri);
+      const processedImage = processImageResult(result);
+      if (processedImage) {
+        setImageBase64(processedImage);
+        setModalVisible(false);
+      }
+    } catch (error) {
+      console.error("Error taking photo:", error);
+      alert("An error occurred while taking the photo. Please try again.");
     }
   };
 
@@ -66,7 +112,7 @@ const ProfileImageModal = (props: Props) => {
           >
             <Text style={styles.backText}>← Back</Text>
           </TouchableOpacity>
-          <Image source={{ uri: imageUri }} style={styles.fullscreenImage} />
+          <Image source={{ uri: imageBase64 }} style={styles.fullscreenImage} />
 
           <TouchableOpacity onPress={openImagePicker} style={styles.button}>
             <Text style={styles.text}>Choose from Gallery</Text>

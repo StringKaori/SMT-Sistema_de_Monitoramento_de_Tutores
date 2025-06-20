@@ -1,8 +1,8 @@
 import { CRUDScreenData } from "@common/types/CRUDScreenData";
-import { LoginUser } from "@common/types/User";
+import { User } from "@common/types/User";
 
 export interface ProfileViewModel {
-    user: LoginUser | undefined,
+    user: User | undefined,
     isAdmin: boolean | undefined,
 
     logOut: () => void,

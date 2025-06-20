@@ -1,4 +1,4 @@
-import { LoginUser } from "@common/types/User";
+import { User } from "@common/types/User";
 import { connector } from "../connector";
 import { defaultErrorAction } from "../defaultErrorAction";
 import { APIError } from "../types/APIError";
@@ -10,7 +10,7 @@ const getUserProfile = async (
 ) => {
   try {
     const response = await connector.get(endpoint)
-    return response.data as LoginUser
+    return response.data as User
   } catch (e) {
     defaultErrorAction(e, onError);
   }

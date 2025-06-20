@@ -18,9 +18,7 @@ import { ProfileImageModal } from "./Helpers/ProfileImageModal";
 const ProfileScreen = () => {
   const { theme, width, height } = useThemeStore();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [imageUri, setImageUri] = useState(
-    "https://m.imageimg.net/upload/artist_img/REVOF/498397007683e7c354a07b6772e6a5249c657e46_633ba2168ff16.jpg"
-  );
+  const [imageBase64, setImageBase64] = useState<string>();
   const styles = createStyles(theme.colors, width, height);
   const viewModel = useProfileViewModel();
 
@@ -30,14 +28,12 @@ const ProfileScreen = () => {
         <TouchableOpacity onPress={() => setIsModalVisible(true)}>
           <Image
             style={styles.profileImage}
-            source={{
-              uri: imageUri,
-            }}
+            source={imageBase64 ? { uri: imageBase64 } : require('@assets/profile_picture.png')}
           />
         </TouchableOpacity>
         <View style={styles.column}>
           <Text style={styles.name}>
-            {viewModel.user?.fullName || viewModel.user?.username}
+            {viewModel.user?.fullName}
           </Text>
           {/* TODO: falar pro tavos adicionar prontuário */}
           <Text style={styles.id}>BP304002X</Text>
@@ -53,8 +49,8 @@ const ProfileScreen = () => {
       <ProfileImageModal
         modalVisible={isModalVisible}
         setModalVisible={setIsModalVisible}
-        imageUri={imageUri}
-        setImageUri={setImageUri}
+        imageBase64={imageBase64}
+        setImageBase64={setImageBase64}
       />
     </View>
   );

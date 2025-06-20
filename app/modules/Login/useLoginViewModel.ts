@@ -7,6 +7,7 @@ import { saveToken, saveUserID } from "global/SecureStore";
 import { useUserStore } from "global/UserData/useUserStore";
 import { LoginUser, User } from "@common/types/User";
 import { updateConnectorToken } from "@common/axios/connector";
+import { getUserProfile } from "@common/axios/profile/profile";
 
 const useLoginViewModel = (): LoginViewModel => {
   const navigation = useNavigation<RootStackNavigationProp>();
@@ -31,12 +32,13 @@ const useLoginViewModel = (): LoginViewModel => {
     console.error(e.message);
   };
 
-  const onSuccess = (data: LoginUserDataType) => {
+  const onSuccess = async (data: LoginUserDataType) => {
     saveToken(data.data.token);
     saveUserID(data.data.id);
-
-    setUser(data.data as LoginUser);
     updateConnectorToken(data.data.token);
+
+    const user = await getUserProfile(onError);
+    if(user) setUser(user);
 
     navigation.reset({ index: 0, routes: [{ name: "BottomTab" }] });
   };

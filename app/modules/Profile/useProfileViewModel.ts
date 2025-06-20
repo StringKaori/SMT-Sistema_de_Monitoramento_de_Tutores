@@ -8,7 +8,7 @@ import { CRUDScreenData } from "@common/types/CRUDScreenData";
 const useProfileViewModel = (): ProfileViewModel => {
     const { user } = useUserStore();
     const navigation = useNavigation<RootStackNavigationProp>();
-    const authorities = user?.authorities || user?.authoritiesList
+    const authorities = user?.authoritiesList
     const isAdmin = authorities?.includes("ROLE_ADMIN_USER");
 
     const logOut = async () => {
