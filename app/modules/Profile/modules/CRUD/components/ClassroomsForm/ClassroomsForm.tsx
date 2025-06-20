@@ -44,13 +44,14 @@ const ClassroomForm = (props: Props) => {
 
       <DefaultTextInput
         value={viewModel.floor}
+        keyboardType={"numeric"}
         onChangeText={viewModel.setFloor}
         placeholder={"Floor"}
       />
 
       <DefaultTextInput
         value={viewModel.capacity}
-        keyboardType="numeric"
+        keyboardType={"numeric"}
         onChangeText={viewModel.setCapacity}
         placeholder={"Capacity"}
       />

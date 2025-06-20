@@ -12,6 +12,7 @@ import {
 import { CRUDItem } from "../../Helpers/CRUDItem";
 import { useCRUDViewModel } from "./useCRUDViewModel";
 import { DeleteModal } from "./components/DeleteModal/DeleteModal";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "CRUDScreen">;
@@ -23,7 +24,7 @@ const CRUDScreen = ({ route }: Prop) => {
   const viewModel = useCRUDViewModel(route.params);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>{route.params.entityType}</Text>
       <TouchableOpacity
         style={styles.button}
@@ -54,7 +55,7 @@ const CRUDScreen = ({ route }: Prop) => {
         onClose={() => viewModel.setModalVisible(false)}
         onConfirm={viewModel.onDeleteItem}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
