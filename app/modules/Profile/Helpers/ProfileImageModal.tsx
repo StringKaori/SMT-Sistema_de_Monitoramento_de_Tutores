@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   View,
   Modal,
@@ -7,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import * as ImagePicker from "expo-image-picker"; //MARK: - uso de câmera aqui
 import { BooleanSetter, StringSetter } from "@common/types/SetStateType";
 
 interface Props {

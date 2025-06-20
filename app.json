@@ -13,7 +13,13 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Your location is used for geofencing.",
+        "NSLocationAlwaysUsageDescription": "Your location is used for geofencing.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Your location is used for geofencing.",
+        "NSUserNotificationUsageDescription": "The app needs permission to send push notifications."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +27,12 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.SMTSistema_de_Monitoramento_de_Tutores"
+      "package": "com.sleep.sistemademonitoramentodetutores",
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.POST_NOTIFICATIONS"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"

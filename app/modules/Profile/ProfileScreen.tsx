@@ -12,7 +12,7 @@ import { TitleView } from "@common/components";
 import { MenuItem } from "./Helpers/MenuItem";
 import { AdminModule } from "./modules/AdminModule";
 import { useProfileViewModel } from "./useProfileViewModel";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { ProfileImageModal } from "./Helpers/ProfileImageModal";
 
 const ProfileScreen = () => {

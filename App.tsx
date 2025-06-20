@@ -1,4 +1,4 @@
-import { useWindowDimensions } from "react-native";
+import { Platform, useWindowDimensions } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootStack } from "@routes/Stack/RootStack/RootStack";
@@ -11,6 +11,9 @@ import { useUserStore } from "global/UserData/useUserStore";
 import { updateConnectorToken } from "@common/axios/connector";
 import { getUserProfile } from "@common/axios/profile/profile";
 import { APIError } from "@common/axios";
+
+import * as Location from "expo-location";
+import * as Notifications from "expo-notifications";
 
 export default function App() {
   const { width, height } = useWindowDimensions();
@@ -58,10 +61,22 @@ export default function App() {
     handleAlreadyAuth();
   }, []);
 
+  useEffect(() => {
+    async function handlePermissions() {
+      try {
+        await Location.requestForegroundPermissionsAsync();
+        await Notifications.requestPermissionsAsync();
+      } catch (err) {
+        console.warn("Permission error:", err);
+      }
+    }
+    handlePermissions();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <RootStack firstScreen={firstScreen} key={firstScreen}/>
+        <RootStack firstScreen={firstScreen} key={firstScreen} />
         <Toast />
       </NavigationContainer>
     </SafeAreaProvider>
