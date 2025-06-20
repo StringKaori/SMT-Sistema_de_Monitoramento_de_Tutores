@@ -3,8 +3,8 @@ import {
   StyleSheet,
   Text,
   Image,
-  TouchableOpacity,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
@@ -12,23 +12,33 @@ import { TitleView } from "@common/components";
 import { MenuItem } from "./Helpers/MenuItem";
 import { AdminModule } from "./modules/AdminModule";
 import { useProfileViewModel } from "./useProfileViewModel";
+import { SetStateAction, useState } from "react";
+import { ProfileImageModal } from "./Helpers/ProfileImageModal";
 
 const ProfileScreen = () => {
   const { theme, width, height } = useThemeStore();
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [imageUri, setImageUri] = useState(
+    "https://m.imageimg.net/upload/artist_img/REVOF/498397007683e7c354a07b6772e6a5249c657e46_633ba2168ff16.jpg"
+  );
   const styles = createStyles(theme.colors, width, height);
   const viewModel = useProfileViewModel();
 
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Image
-          style={styles.profileImage}
-          source={{
-            uri: "https://m.imageimg.net/upload/artist_img/REVOF/498397007683e7c354a07b6772e6a5249c657e46_633ba2168ff16.jpg",
-          }}
-        />
+        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+          <Image
+            style={styles.profileImage}
+            source={{
+              uri: imageUri,
+            }}
+          />
+        </TouchableOpacity>
         <View style={styles.column}>
-          <Text style={styles.name}>{viewModel.user?.fullName || viewModel.user?.username}</Text>
+          <Text style={styles.name}>
+            {viewModel.user?.fullName || viewModel.user?.username}
+          </Text>
           {/* TODO: falar pro tavos adicionar prontuário */}
           <Text style={styles.id}>BP304002X</Text>
         </View>
@@ -37,9 +47,15 @@ const ProfileScreen = () => {
         {viewModel.isAdmin && <AdminModule viewModel={viewModel} />}
 
         <TitleView title={"Account"} />
-        <MenuItem title={"Reset Password"} action={()=>{}}/>
+        <MenuItem title={"Reset Password"} action={() => {}} />
         <MenuItem title={"Log Out"} action={viewModel.logOut} />
       </ScrollView>
+      <ProfileImageModal
+        modalVisible={isModalVisible}
+        setModalVisible={setIsModalVisible}
+        imageUri={imageUri}
+        setImageUri={setImageUri}
+      />
     </View>
   );
 };
@@ -61,7 +77,7 @@ const createStyles = (colors: ThemeColors, width: number, height: number) =>
       color: colors.primaryText,
       fontWeight: "bold",
       fontSize: height * 0.025,
-      textAlign: `center`
+      textAlign: `center`,
     },
     id: {
       color: colors.primaryText,
