@@ -11,6 +11,7 @@ const useUserFormViewModel = (item?: User, isEditing?: boolean): UserFormViewMod
   const [fullName, setFullName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [showError, setShowError] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const navigation = useNavigation<RootStackNavigationProp>();
 
   const handlePress = async () => {
@@ -21,12 +22,12 @@ const useUserFormViewModel = (item?: User, isEditing?: boolean): UserFormViewMod
     }
 
     if (isEditing && item) {
-      await updateUser(item.id, fullName, email.toLowerCase(), onError);
+      await updateUser(item.id, fullName, email.toLowerCase(), isAdmin, onError);
       onSuccess()
       return
     }
 
-    await createUser(fullName, email.toLowerCase(), onError, onSuccess);
+    await createUser(fullName, email.toLowerCase(), isAdmin, onError, onSuccess);
   };
 
   const onError = (e: APIError) => {
@@ -51,8 +52,11 @@ const useUserFormViewModel = (item?: User, isEditing?: boolean): UserFormViewMod
 
     email,
     setEmail,
+    isAdmin,
+    setIsAdmin,
 
     showError,
+    
     handlePress,
     onError,
     onSuccess,

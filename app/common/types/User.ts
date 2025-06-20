@@ -13,7 +13,7 @@ export type User = {
     fullName: string;
     email: string;
     id: string;
-    authorities: Authorities[];
+    authoritiesList: Authorities[];
     enabled: boolean,
     credentialsNonExpired: boolean,
     accountNonExpired: boolean,

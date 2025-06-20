@@ -1,5 +1,5 @@
 import { APIError } from "@common/axios";
-import { StringOrUndefinedSetter } from "@common/types/SetStateType";
+import { BooleanSetter, StringOrUndefinedSetter } from "@common/types/SetStateType";
 
 export interface UserFormViewModel {
     fullName: string | undefined, 
@@ -7,6 +7,9 @@ export interface UserFormViewModel {
 
     email: string | undefined,
     setEmail: StringOrUndefinedSetter,
+
+    isAdmin: boolean,
+    setIsAdmin: BooleanSetter,
 
     showError: boolean,
 

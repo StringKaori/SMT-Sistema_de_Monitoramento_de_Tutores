@@ -8,11 +8,12 @@ const endpoint = "/admin/users";
 const createUser = async (
   fullName: string,
   email: string,
+  isAdmin: boolean,
   onError: (data: APIError) => void,
-  onSuccess: () => void
+  onSuccess: () => void,
 ) => {
   try {
-    await connector.post(endpoint, { fullName, email });
+    await connector.post(endpoint, { fullName, email, isAdmin });
     onSuccess();
   } catch (e) {
     defaultErrorAction(e, onError);
@@ -47,10 +48,11 @@ const updateUser = async (
   id: string,
   fullName: string,
   email: string,
+  isAdmin: boolean,
   onError: (e: APIError) => void
 ) => {
   try {
-    await connector.put(`${endpoint}/${id}`, { fullName, email })
+    await connector.put(`${endpoint}/${id}`, { fullName, email, isAdmin })
     return "User successfully updated!";
   } catch (e) {
     defaultErrorAction(e, onError);
