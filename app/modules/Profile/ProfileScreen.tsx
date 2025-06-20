@@ -28,7 +28,7 @@ const ProfileScreen = () => {
           }}
         />
         <View style={styles.column}>
-          <Text style={styles.name}>{viewModel.user?.username}</Text>
+          <Text style={styles.name}>{viewModel.user?.fullName || viewModel.user?.username}</Text>
           {/* TODO: falar pro tavos adicionar prontuário */}
           <Text style={styles.id}>BP304002X</Text>
         </View>

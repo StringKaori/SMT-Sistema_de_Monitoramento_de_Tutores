@@ -7,6 +7,10 @@ export type LoginUser = {
     authorities: Authorities[];
     token: string,
     expirationTime: number
+    // just to solve back-end returning
+    // user and not loginuser sometimes
+    authoritiesList?: Authorities[];
+    fullName?: string;
 };
 
 export type User = {       
