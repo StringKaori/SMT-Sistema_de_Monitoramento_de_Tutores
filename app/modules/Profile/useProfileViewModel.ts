@@ -53,7 +53,7 @@ const useProfileViewModel = (): ProfileViewModel => {
   };
 
   const navigateToResetPassword = () => {
-    // navigation.navigate();
+    navigation.navigate("ResetPasswordForm");
   }
 
   return {

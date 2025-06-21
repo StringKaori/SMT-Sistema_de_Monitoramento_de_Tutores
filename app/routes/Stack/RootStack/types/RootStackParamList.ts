@@ -10,4 +10,5 @@ export type RootStackParamList = {
     RoomsMoreInfoScreen: RoomData;
     CRUDScreen: CRUDScreenData;
     DefaultForm: DefaultFormData;
+    ResetPasswordForm: undefined;
 }

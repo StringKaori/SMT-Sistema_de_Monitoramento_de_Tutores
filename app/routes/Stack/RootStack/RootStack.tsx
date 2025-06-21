@@ -8,6 +8,7 @@ import { LoginScreen } from "@modules/Login/LoginScreen";
 import { RoomsMoreInfo } from "@modules/Rooms/RoomsMoreInfo";
 import { CRUDScreen } from "@modules/Profile/modules/CRUD/CRUDScreen";
 import { DefaultForm } from "@modules/Profile/modules/CRUD/components/DefaultForm";
+import { ResetPasswordForm } from "@modules/Profile/modules/ResetPasswordForm";
 
 interface Props {
   firstScreen: keyof RootStackParamList;
@@ -45,6 +46,7 @@ const RootStack = (props: Props) => {
       <Stack.Screen name={"CRUDScreen"} component={CRUDScreen} />
 
       <Stack.Screen name={"DefaultForm"} component={DefaultForm} />
+      <Stack.Screen name={"ResetPasswordForm"} component={ResetPasswordForm} />
     </Stack.Navigator>
   );
 };

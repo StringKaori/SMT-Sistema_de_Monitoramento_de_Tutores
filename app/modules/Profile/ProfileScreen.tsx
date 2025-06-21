@@ -32,7 +32,6 @@ const ProfileScreen = () => {
           <Text style={styles.name}>
             {viewModel.user?.fullName}
           </Text>
-          {/* TODO: falar pro tavos adicionar prontuário */}
           <Text style={styles.id}>{viewModel.user?.enrollment}</Text>
         </View>
       </View>
@@ -40,7 +39,7 @@ const ProfileScreen = () => {
         {viewModel.isAdmin && <AdminModule viewModel={viewModel} />}
 
         <TitleView title={"Account"} />
-        <MenuItem title={"Reset Password"} action={() => {}} />
+        <MenuItem title={"Reset Password"} action={viewModel.navigateToResetPassword} />
         <MenuItem title={"Log Out"} action={viewModel.logOut} />
       </ScrollView>
       {viewModel.isModalVisible && <ProfileImageModal

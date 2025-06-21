@@ -7,4 +7,5 @@ export interface CustomTextInputProps {
     placeholder: string;
     placeholderTextColor?: string;
     keyboardType?: KeyboardType
+    shouldHidePasswordInitialValue?: boolean
 }

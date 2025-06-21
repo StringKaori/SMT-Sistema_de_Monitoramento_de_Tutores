@@ -6,8 +6,16 @@ import ShowPasswordSVG from "@assets/show_password_icon.svg";
 import HidePasswordSVG from "@assets/hide_password_icon.svg";
 
 const PasswordTextInput = (props: CustomTextInputProps) => {
-  const [shouldHidePassword, setShouldHidePassword] = useState<boolean>(true);
-  const { value, onChangeText, placeholder, placeholderTextColor } = props;
+  const {
+    value,
+    onChangeText,
+    placeholder,
+    placeholderTextColor,
+    shouldHidePasswordInitialValue,
+  } = props;
+  const [shouldHidePassword, setShouldHidePassword] = useState<boolean>(
+    shouldHidePasswordInitialValue ?? true
+  );
   return (
     <View style={styles.container}>
       <DefaultTextInput
@@ -21,7 +29,7 @@ const PasswordTextInput = (props: CustomTextInputProps) => {
         onPress={() => setShouldHidePassword((prev) => !prev)}
         style={styles.button}
       >
-        {shouldHidePassword ? <HidePasswordSVG/> : <ShowPasswordSVG />}
+        {shouldHidePassword ? <HidePasswordSVG /> : <ShowPasswordSVG />}
       </TouchableOpacity>
     </View>
   );
