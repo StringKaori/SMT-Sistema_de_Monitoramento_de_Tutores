@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FloorsEnum } from "@common/types/FloorsEnum";
 import { RoomViewModel } from "./types/RoomViewModel";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 import { getAllClassroomsListByFloor } from "@common/axios/dashboard/dashboard";
 import { Classrooms } from "@common/types/Classrooms";
@@ -19,17 +19,19 @@ const useRoomViewModel = (): RoomViewModel => {
     return match ? parseInt(match[1]) : NaN;
   };
 
-  useEffect(() => {
-    const getRooms = async () => {
-      // yeah yeah, floors is a enum but i'm doing this,
-      // like i said before, no time rn
-      const floor = getFloorNumber(selectedFloor);
-      const response = await getAllClassroomsListByFloor(floor);
-      setRooms(response);
-    };
-
-    getRooms();
+  const loadData = useCallback(async () => {
+    // yeah yeah, floors is a enum but i'm doing this,
+    // like i said before, no time rn
+    const floor = getFloorNumber(selectedFloor);
+    const response = await getAllClassroomsListByFloor(floor);
+    setRooms(response);
   }, [selectedFloor]);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadData();
+    }, [selectedFloor])
+  );
 
   const handlePress = async (item: FloorsEnum) => {
     setSelectedFloor(item);
