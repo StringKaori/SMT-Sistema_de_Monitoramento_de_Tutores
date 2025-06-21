@@ -10,14 +10,14 @@ import { APIError } from "@common/axios";
 import Toast from "react-native-toast-message";
 
 const useProfileViewModel = (): ProfileViewModel => {
-  const { user } = useUserStore();
+  const { user, setProfilePicture } = useUserStore();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [imageBase64, setImageBase64] = useState<string>();
+  
   const navigation = useNavigation<RootStackNavigationProp>();
   const authorities = user?.authoritiesList;
   const isAdmin = authorities?.includes("ROLE_ADMIN_USER");
 
-  const { setProfilePicture } = useUserStore();
   const onError = (e: APIError) => {
     Toast.show({
       type: "error",
@@ -36,7 +36,6 @@ const useProfileViewModel = (): ProfileViewModel => {
     };
 
     getUserProfilePicture();
-    
   }, []);
 
   const logOut = async () => {
@@ -53,6 +52,10 @@ const useProfileViewModel = (): ProfileViewModel => {
     navigation.navigate("CRUDScreen", params);
   };
 
+  const navigateToResetPassword = () => {
+    // navigation.navigate();
+  }
+
   return {
     user,
     isModalVisible,
@@ -63,6 +66,7 @@ const useProfileViewModel = (): ProfileViewModel => {
 
     logOut,
     navigateTo,
+    navigateToResetPassword
   };
 };
 

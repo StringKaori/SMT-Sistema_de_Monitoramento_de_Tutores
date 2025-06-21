@@ -18,6 +18,7 @@ export type User = {
     email: string;
     id: string;
     profilePhoto?: string;
+    enrollment: string;
     authoritiesList: Authorities[];
     enabled: boolean,
     credentialsNonExpired: boolean,

@@ -12,7 +12,6 @@ import { TitleView } from "@common/components";
 import { MenuItem } from "./Helpers/MenuItem";
 import { AdminModule } from "./modules/AdminModule";
 import { useProfileViewModel } from "./useProfileViewModel";
-import { useState } from "react";
 import { ProfileImageModal } from "./Helpers/ProfileImageModal";
 
 const ProfileScreen = () => {
@@ -34,7 +33,7 @@ const ProfileScreen = () => {
             {viewModel.user?.fullName}
           </Text>
           {/* TODO: falar pro tavos adicionar prontuário */}
-          <Text style={styles.id}>BP304002X</Text>
+          <Text style={styles.id}>{viewModel.user?.enrollment}</Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

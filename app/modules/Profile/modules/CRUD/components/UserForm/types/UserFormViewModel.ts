@@ -8,6 +8,9 @@ export interface UserFormViewModel {
     email: string | undefined,
     setEmail: StringOrUndefinedSetter,
 
+    enrollment: string | undefined,
+    setEnrollment: StringOrUndefinedSetter,
+
     isAdmin: boolean,
     setIsAdmin: BooleanSetter,
 

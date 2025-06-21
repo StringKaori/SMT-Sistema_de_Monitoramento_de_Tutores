@@ -39,6 +39,12 @@ const UserForm = (props: Props) => {
         onChangeText={viewModel.setEmail}
         placeholder={"Email"}
       />
+
+      <DefaultTextInput
+        value={viewModel.enrollment}
+        onChangeText={viewModel.setEnrollment}
+        placeholder={"Enrollment"}
+      />
       <View style={{ flexDirection: "row", alignItems: "center", alignSelf: 'flex-end'}}>
       <Switch value={viewModel.isAdmin} onValueChange={viewModel.setIsAdmin} />
       <Text>Is Admin</Text>

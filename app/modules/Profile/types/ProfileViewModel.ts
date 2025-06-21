@@ -17,4 +17,5 @@ export interface ProfileViewModel {
 
   logOut: () => void;
   navigateTo: (params: CRUDScreenData) => void;
+  navigateToResetPassword: () => void;
 }

@@ -10,24 +10,25 @@ import { User } from "@common/types/User";
 const useUserFormViewModel = (item?: User, isEditing?: boolean): UserFormViewModel => {
   const [fullName, setFullName] = useState<string>();
   const [email, setEmail] = useState<string>();
+  const [enrollment, setEnrollment] = useState<string>();
   const [showError, setShowError] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const navigation = useNavigation<RootStackNavigationProp>();
 
   const handlePress = async () => {
     setShowError(false);
-    if (!fullName || !email) {
+    if (!fullName || !email || !enrollment) {
       setShowError(true);
       return;
     }
 
     if (isEditing && item) {
-      await updateUser(item.id, fullName, email.toLowerCase(), isAdmin, onError);
+      await updateUser(item.id, fullName, email.toLowerCase(), enrollment, isAdmin, onError);
       onSuccess()
       return
     }
 
-    await createUser(fullName, email.toLowerCase(), isAdmin, onError, onSuccess);
+    await createUser(fullName, email.toLowerCase(), enrollment, isAdmin, onError, onSuccess);
   };
 
   const onError = (e: APIError) => {
@@ -52,6 +53,10 @@ const useUserFormViewModel = (item?: User, isEditing?: boolean): UserFormViewMod
 
     email,
     setEmail,
+
+    enrollment, 
+    setEnrollment,
+
     isAdmin,
     setIsAdmin,
 
