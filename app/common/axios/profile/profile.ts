@@ -17,6 +17,18 @@ const getUserProfile = async (
 
 };
 
+const getAndSetUserPicture = async (
+  onSuccess: (encodedBase64Image: string) => void,
+  onError: (data: APIError) => void,
+) => {
+  try {
+    const response = await connector.get(`${endpoint}/photo`);
+    onSuccess(response.data.photo)
+  } catch (e) {
+    defaultErrorAction(e, onError);
+  }
+};
+
 const updateUserPicture = async (
   encodedBase64Image: string,
   onSuccess: () => void,
@@ -31,4 +43,4 @@ const updateUserPicture = async (
 
 };
 
-export { getUserProfile, updateUserPicture };
+export { getUserProfile, updateUserPicture, getAndSetUserPicture };
