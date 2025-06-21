@@ -7,7 +7,14 @@ import {
   StyleSheet,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker"; //MARK: - uso de câmera aqui
-import { BooleanSetter, StringOrUndefinedSetter } from "@common/types/SetStateType";
+import {
+  BooleanSetter,
+  StringOrUndefinedSetter,
+} from "@common/types/SetStateType";
+import { useEffect, useState } from "react";
+import { APIError } from "@common/axios";
+import Toast from "react-native-toast-message";
+import { updateUserPicture } from "@common/axios/profile/profile";
 
 interface Props {
   modalVisible: boolean;
@@ -18,7 +25,11 @@ interface Props {
 
 const ProfileImageModal = (props: Props) => {
   const { modalVisible, setModalVisible, imageBase64, setImageBase64 } = props;
+  const [temporaryImage, setTemporaryImage] = useState<string>(
+    imageBase64 ?? ""
+  );
 
+  // YEAH I KNOW this is fvcking ugly, but i don't have time rn
   const processImageResult = (result: ImagePicker.ImagePickerResult) => {
     if (result.canceled || !result.assets || result.assets.length === 0) {
       return;
@@ -70,8 +81,7 @@ const ProfileImageModal = (props: Props) => {
 
       const processedImage = processImageResult(result);
       if (processedImage) {
-        setImageBase64(processedImage);
-        setModalVisible(false);
+        setTemporaryImage(processedImage);
       }
     } catch (error) {
       console.error("Error picking image:", error);
@@ -93,8 +103,7 @@ const ProfileImageModal = (props: Props) => {
 
       const processedImage = processImageResult(result);
       if (processedImage) {
-        setImageBase64(processedImage);
-        setModalVisible(false);
+        setTemporaryImage(processedImage);
       }
     } catch (error) {
       console.error("Error taking photo:", error);
@@ -102,17 +111,44 @@ const ProfileImageModal = (props: Props) => {
     }
   };
 
+  const handleBack = () => {
+    setTemporaryImage("");
+    setModalVisible(false);
+  };
+
+  const onError = (e: APIError) => {
+    console.error(e.message);
+    Toast.show({
+      type: "error",
+      text1: e.message,
+    });
+  };
+
+  const onSuccess = () => {
+    Toast.show({
+      type: "success",
+      text1: "Profile picture updated successfully!",
+    });
+    handleBack();
+  };
+
+  const handleConfirm = async () => {
+    setImageBase64(temporaryImage);
+    updateUserPicture(temporaryImage, onSuccess, onError)
+    handleBack();
+  };
+
   return (
     <View>
       <Modal visible={modalVisible} transparent={false} animationType="slide">
         <View style={styles.modalContainer}>
-          <TouchableOpacity
-            onPress={() => setModalVisible(false)}
-            style={styles.backButton}
-          >
+          <TouchableOpacity onPress={handleBack} style={styles.backButton}>
             <Text style={styles.backText}>← Back</Text>
           </TouchableOpacity>
-          <Image source={{ uri: imageBase64 }} style={styles.fullscreenImage} />
+          <Image
+            source={{ uri: temporaryImage }}
+            style={styles.fullscreenImage}
+          />
 
           <TouchableOpacity onPress={openImagePicker} style={styles.button}>
             <Text style={styles.text}>Choose from Gallery</Text>
@@ -121,9 +157,8 @@ const ProfileImageModal = (props: Props) => {
           <TouchableOpacity onPress={openCamera} style={styles.button}>
             <Text style={styles.text}>Take a Photo</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
-            <Text style={styles.text}>Close</Text>
+          <TouchableOpacity onPress={handleConfirm} style={styles.button}>
+            <Text style={styles.text}>Confirm</Text>
           </TouchableOpacity>
         </View>
       </Modal>

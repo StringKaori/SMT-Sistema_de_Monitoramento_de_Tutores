@@ -17,18 +17,16 @@ import { ProfileImageModal } from "./Helpers/ProfileImageModal";
 
 const ProfileScreen = () => {
   const { theme, width, height } = useThemeStore();
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [imageBase64, setImageBase64] = useState<string>();
   const styles = createStyles(theme.colors, width, height);
   const viewModel = useProfileViewModel();
 
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+        <TouchableOpacity onPress={() => viewModel.setIsModalVisible(true)}>
           <Image
             style={styles.profileImage}
-            source={imageBase64 ? { uri: imageBase64 } : require('@assets/profile_picture.png')}
+            source={viewModel.imageBase64 ? { uri: viewModel.imageBase64 } : require('@assets/profile_picture.png')}
           />
         </TouchableOpacity>
         <View style={styles.column}>
@@ -46,12 +44,12 @@ const ProfileScreen = () => {
         <MenuItem title={"Reset Password"} action={() => {}} />
         <MenuItem title={"Log Out"} action={viewModel.logOut} />
       </ScrollView>
-      <ProfileImageModal
-        modalVisible={isModalVisible}
-        setModalVisible={setIsModalVisible}
-        imageBase64={imageBase64}
-        setImageBase64={setImageBase64}
-      />
+      {viewModel.isModalVisible && <ProfileImageModal
+        modalVisible={viewModel.isModalVisible}
+        setModalVisible={viewModel.setIsModalVisible}
+        imageBase64={viewModel.imageBase64}
+        setImageBase64={viewModel.setImageBase64}
+      />}
     </View>
   );
 };

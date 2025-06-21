@@ -4,34 +4,45 @@ import { useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 import { removeToken, removeUserID } from "global/SecureStore";
 import { CRUDScreenData } from "@common/types/CRUDScreenData";
+import { useEffect, useState } from "react";
 
 const useProfileViewModel = (): ProfileViewModel => {
-    const { user } = useUserStore();
-    const navigation = useNavigation<RootStackNavigationProp>();
-    const authorities = user?.authoritiesList
-    const isAdmin = authorities?.includes("ROLE_ADMIN_USER");
+  const { user } = useUserStore();
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [imageBase64, setImageBase64] = useState<string>();
+  const navigation = useNavigation<RootStackNavigationProp>();
+  const authorities = user?.authoritiesList;
+  const isAdmin = authorities?.includes("ROLE_ADMIN_USER");
 
-    const logOut = async () => {
-      try {
-        await removeToken();
-        await removeUserID();
-        navigation.reset({ index: 0, routes: [{ name: "LoginScreen" }] });
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  useEffect(()=>{
+    setImageBase64(user?.profilePhoto);
+  }, [user])
 
-    const navigateTo = (params: CRUDScreenData) => {
-        navigation.navigate("CRUDScreen", params)
+  const logOut = async () => {
+    try {
+      await removeToken();
+      await removeUserID();
+      navigation.reset({ index: 0, routes: [{ name: "LoginScreen" }] });
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    return {
-        user,
-        isAdmin,
+  const navigateTo = (params: CRUDScreenData) => {
+    navigation.navigate("CRUDScreen", params);
+  };
 
-        logOut,
-        navigateTo
-    };
-}
+  return {
+    user,
+    isModalVisible,
+    setIsModalVisible,
+    imageBase64,
+    setImageBase64,
+    isAdmin,
+
+    logOut,
+    navigateTo,
+  };
+};
 
 export { useProfileViewModel };

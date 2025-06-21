@@ -17,4 +17,18 @@ const getUserProfile = async (
 
 };
 
-export { getUserProfile };
+const updateUserPicture = async (
+  encodedBase64Image: string,
+  onSuccess: () => void,
+  onError: (data: APIError) => void,
+) => {
+  try {
+    await connector.patch(`${endpoint}/photo`, { encodedBase64Image })
+    onSuccess();
+  } catch (e) {
+    defaultErrorAction(e, onError);
+  }
+
+};
+
+export { getUserProfile, updateUserPicture };

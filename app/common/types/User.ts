@@ -17,6 +17,7 @@ export type User = {
     fullName: string;
     email: string;
     id: string;
+    profilePhoto?: string;
     authoritiesList: Authorities[];
     enabled: boolean,
     credentialsNonExpired: boolean,
