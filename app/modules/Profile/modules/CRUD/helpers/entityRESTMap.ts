@@ -2,6 +2,7 @@ import { APIError } from "@common/axios";
 import { deleteClassroom, getClassroomsList } from "@common/axios/admin/classrooms/classrooms";
 import { deleteCourse, getCoursesList } from "@common/axios/admin/courses/courses";
 import { deleteDiscipline, getDisciplinesList } from "@common/axios/admin/disciplines/disciplines";
+import { deleteEvent, getEventsList } from "@common/axios/admin/events/events";
 import { deleteProfessor, getProfessorsList } from "@common/axios/admin/professors/professors";
 import { deleteUser, getUsersList } from "@common/axios/admin/users/users";
 import { EntityTypes } from "@common/types/CRUDScreenData";
@@ -44,8 +45,12 @@ export const entityRESTMap: Record<
   },
 
   [EntityTypes.Events]: {
-    get: async (onError, onSuccess) => {},
-    delete: async (id, onError) => {},
+    get: async (onError, onSuccess) => {
+      await getEventsList(onError, onSuccess)
+    },
+    delete: async (id, onError) => {
+      return await deleteEvent(id, onError);
+    },
   },
 
   [EntityTypes.Professors]: {

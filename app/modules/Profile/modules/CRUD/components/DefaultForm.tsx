@@ -16,6 +16,8 @@ import { ProfessorForm } from "./ProfessorForm/ProfessorForm";
 import { Professor } from "@common/types/Professor";
 import { DisciplinesForm } from "./DisciplinesForm/DisciplinesForm";
 import { Discipline } from "@common/types/Discipline";
+import { EventsForm } from "./EventsForm/EventsForm";
+import { Events } from "@common/types/Events";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "DefaultForm">;
@@ -28,7 +30,7 @@ const DefaultForm = ({ route }: Prop) => {
     [EntityTypes.Classrooms]: () => <ClassroomForm isEditing={data.isEditing} item={data.item as Classrooms}/>,
     [EntityTypes.Courses]: () => <CourseForm isEditing={data.isEditing} item={data.item as Course} />,
     [EntityTypes.Disciplines]: () => <DisciplinesForm isEditing={data.isEditing} item={data.item as Discipline} />,
-    [EntityTypes.Events]: () => <></>,
+    [EntityTypes.Events]: () => <EventsForm isEditing={data.isEditing} item={data.item as Events} />,
     [EntityTypes.Professors]: () => <ProfessorForm isEditing={data.isEditing} item={data.item as Professor} />,
     [EntityTypes.User]: () => <UserForm isEditing={data.isEditing} item={data.item as User}/>,
   };
