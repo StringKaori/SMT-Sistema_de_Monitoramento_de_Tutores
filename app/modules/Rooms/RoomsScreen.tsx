@@ -16,7 +16,7 @@ const RoomsScreen = () => {
         handlePress={viewModel.handlePress}
       />
       <FlatList
-        data={viewModel.mockRooms[viewModel.selectedFloor ?? "First"]}
+        data={viewModel.rooms}
         numColumns={2}
         key={"RoomGridView"}
         showsVerticalScrollIndicator={false}

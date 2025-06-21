@@ -1,5 +1,5 @@
 import { GenericScroller } from "@common/components";
-import { RoomData } from "@common/types/RoomCardData";
+import { Classrooms } from "@common/types/Classrooms";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "@routes/Stack/RootStack/types/RootStackParamList";
 import { ThemeColors } from "app/theme/types/ThemeType";
@@ -13,17 +13,17 @@ interface Prop {
 const RoomsMoreInfo = ({ route }: Prop) => {
     const { theme, width, height } = useThemeStore();
     const styles = createStyles(theme.colors, height);
-    const room: RoomData = route.params;
+    const room: Classrooms = route.params;
 
     return (
         <View style={styles.container}>
-            <Text style={styles.code}>{room.code}</Text>
+            <Text style={styles.code}>{room.description}</Text>
 
             <Text style={styles.subtitle}>Capacity</Text>
-            <Text style={styles.text}>30</Text>
+            <Text style={styles.text}>{room.capacity}</Text>
 
             <Text style={styles.subtitle}>Notes</Text>
-            <Text style={styles.text}>Inclui projetor e quadro branco</Text>
+            <Text style={styles.text}>{room.observation}</Text>
             <GenericScroller title={"Wednesday"}/>
         </View>
     );

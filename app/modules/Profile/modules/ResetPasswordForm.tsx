@@ -38,7 +38,7 @@ const ResetPasswordForm = () => {
       type: "success",
       text1: message,
     });
-    navigation.goBack()
+    navigation.goBack();
   };
 
   const handlePress = async () => {

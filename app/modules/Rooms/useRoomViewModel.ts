@@ -1,27 +1,47 @@
-import { RoomCardData } from "@common/types/RoomCardData";
-import Mock from './mock/mock.json'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FloorsEnum } from "@common/types/FloorsEnum";
 import { RoomViewModel } from "./types/RoomViewModel";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
+import { getAllClassroomsListByFloor } from "@common/axios/dashboard/dashboard";
+import { Classrooms } from "@common/types/Classrooms";
 
 const useRoomViewModel = (): RoomViewModel => {
-    const mockRooms: RoomCardData = Mock;
-    const [selectedFloor, setSelectedFloor] = useState<FloorsEnum>(FloorsEnum.First);
-    const navigation = useNavigation<RootStackNavigationProp>();
+  const [selectedFloor, setSelectedFloor] = useState<FloorsEnum>(
+    FloorsEnum.First
+  );
+  const [rooms, setRooms] = useState<Classrooms[]>();
 
-    const handlePress = (item: FloorsEnum) => {
-        setSelectedFloor(item)
-    }
+  const navigation = useNavigation<RootStackNavigationProp>();
 
-    return {
-        mockRooms,
-        selectedFloor,
-        navigation,
-        
-        handlePress
-    }
-}
+  const getFloorNumber = (floor: FloorsEnum): number => {
+    const match = floor.match(/^(\d+)/);
+    return match ? parseInt(match[1]) : NaN;
+  };
 
-export { useRoomViewModel }
+  useEffect(() => {
+    const getRooms = async () => {
+      // yeah yeah, floors is a enum but i'm doing this,
+      // like i said before, no time rn
+      const floor = getFloorNumber(selectedFloor);
+      const response = await getAllClassroomsListByFloor(floor);
+      setRooms(response);
+    };
+
+    getRooms();
+  }, [selectedFloor]);
+
+  const handlePress = async (item: FloorsEnum) => {
+    setSelectedFloor(item);
+  };
+
+  return {
+    selectedFloor,
+    navigation,
+    rooms,
+
+    handlePress,
+  };
+};
+
+export { useRoomViewModel };
