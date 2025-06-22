@@ -6,20 +6,23 @@ import { Events } from "@common/types/Events";
 interface Props {
   title: string;
   events: Events[];
+  isProfessor?: boolean;
 }
 
 const GenericScroller = (props: Props) => {
-  const { title, events } = props;
-  
+  const { title, events, isProfessor } = props;
+
   return (
-    <View style={{paddingVertical: 10, alignItems: 'center'}}>
+    <View style={{ paddingVertical: 10, alignItems: "center" }}>
       <TitleView title={title} />
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         data={events}
         renderItem={({ item }) => (
-          <GenericTwoLineCard title={item.description} subtitle={`${item.startTime.slice(0, 5)} - ${item.endTime.slice(0, 5)}`} />
+          <GenericTwoLineCard
+            isProfessor={isProfessor ?? false}
+            event={item} />
         )}
       />
     </View>
