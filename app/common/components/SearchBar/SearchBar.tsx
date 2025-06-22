@@ -59,6 +59,7 @@ const createStyles = (
       paddingHorizontal: 20,
       fontSize: 16,
       paddingRight: iconSize + width * 0.06,
+      color: 'black'
     },
     iconContainer: {
       position: "absolute",

@@ -11,7 +11,7 @@ import {
   BooleanSetter,
   StringOrUndefinedSetter,
 } from "@common/types/SetStateType";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { APIError } from "@common/axios";
 import Toast from "react-native-toast-message";
 import { updateUserPicture } from "@common/axios/profile/profile";
@@ -143,7 +143,7 @@ const ProfileImageModal = (props: Props) => {
       <Modal visible={modalVisible} transparent={false} animationType="slide">
         <View style={styles.modalContainer}>
           <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-            <Text style={styles.backText}>← Back</Text>
+            <Text style={styles.backText}>{`<- Back`}</Text>
           </TouchableOpacity>
           <Image
             source={{ uri: temporaryImage }}
@@ -180,21 +180,21 @@ const styles = StyleSheet.create({
     borderRadius: 0,
   },
   button: {
-    marginTop: 20,
+    marginTop: 10,
     padding: 12,
     backgroundColor: "#fff",
-    borderRadius: 8,
+    borderRadius: 4,
   },
   text: {
     color: "#000",
     fontSize: 16,
   },
   backButton: {
+    textAlign: 'center',
     position: "absolute",
-    top: 50,
-    left: 20,
+    top: 5,
+    left: 5,
     padding: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
     borderRadius: 8,
     zIndex: 10,
   },

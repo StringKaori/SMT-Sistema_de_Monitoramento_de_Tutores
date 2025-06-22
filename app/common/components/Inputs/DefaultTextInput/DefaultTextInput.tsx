@@ -3,8 +3,8 @@ import { StyleSheet, TextInput } from "react-native";
 import { CustomTextInputProps } from "../Types/TextInputProps";
 
 const DefaultTextInput = (props: CustomTextInputProps) => {
-  const { value, onChangeText, placeholder, placeholderTextColor, secureTextEntry, keyboardType } = props;
   const { theme, width } = useThemeStore();
+  const { value, onChangeText, placeholder, placeholderTextColor=theme.colors.secondaryText, secureTextEntry, keyboardType } = props;
   const styles = createStyles(theme.colors.outline, width);
   return (
     <TextInput
@@ -28,7 +28,8 @@ const createStyles = (outlineColor: string, width: number) =>
       borderRadius: 10,
       marginBottom: 20,
       padding: 15,
-      paddingRight: 35
+      paddingRight: 35,
+      color: 'black'
     },
   });
 
