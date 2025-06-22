@@ -22,14 +22,14 @@ const ProfessorCard = (props: ProfessorCardProps) => {
   const [eventMoreInfo, setEventMoreInfo] = useState<EventDetailedInfoType>();
 
   useEffect(() => {
-    // const testDate1 = new Date(2025, 5, 23, 19, 0);
-    const today = new Date().toLocaleDateString("en-US", {
+    const testDate1 = new Date(2025, 5, 23, 21, 0);
+    const today = testDate1.toLocaleDateString("en-US", {
       weekday: "long",
     });
     
     if (!events || events.length === 0 || events[0].weekday !== today) return;
     
-    const now = new Date();
+    const now = testDate1;
     let foundEvent = undefined;
 
     for (const event of events) {
