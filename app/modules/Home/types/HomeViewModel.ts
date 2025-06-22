@@ -3,9 +3,10 @@ import { ProfessorCardData } from "@common/types/ProfessorCardData";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 
 export interface HomeViewModel {
-    mockProfessors: ProfessorCardData,
     selectedDay: DaysEnum | undefined,
     today: DaysEnum | undefined,
+    professorsList: ProfessorCardData[] | undefined,
+
     navigation: RootStackNavigationProp,
 
     handlePress: (item: DaysEnum) => void

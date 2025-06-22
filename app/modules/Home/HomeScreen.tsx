@@ -1,10 +1,6 @@
 import { HorizontalScroller, ProfessorCard } from "@common/components";
 import { DaysEnum } from "@common/types/DaysEnum";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-} from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { CourseSelector } from "@common/components/CourseSelector/CourseSelector";
 import { useHomeViewModel } from "./useHomeViewModel";
 import { useThemeStore } from "app/theme/useThemeStore";
@@ -16,7 +12,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <CourseSelector/>
+      <CourseSelector />
       <HorizontalScroller
         flatListData={Object.values(DaysEnum)}
         selectedItem={viewModel.selectedDay}
@@ -24,23 +20,28 @@ const HomeScreen = () => {
         today={viewModel.today}
       />
 
-      <FlatList
-        data={viewModel.mockProfessors[viewModel.selectedDay ?? "Monday"]}
-        numColumns={2}
-        key={"ProfessorGridView"}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <ProfessorCard data={item} navigation={viewModel.navigation} />}
-      />
+      {viewModel.professorsList && (
+        <FlatList
+          data={viewModel.professorsList}
+          numColumns={2}
+          key={"ProfessorGridView"}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <ProfessorCard data={item} navigation={viewModel.navigation} />
+          )}
+        />
+      )}
     </View>
   );
 };
 
-const createStyles = (background: string) => StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: background
-  },
-});
+const createStyles = (background: string) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: "center",
+      backgroundColor: background,
+    },
+  });
 
 export { HomeScreen };

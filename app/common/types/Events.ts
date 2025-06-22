@@ -9,4 +9,5 @@ export type Events = {
     classroomId: string,
     professorId: string,
     disciplineId: string,
+    courseId: string,
 };

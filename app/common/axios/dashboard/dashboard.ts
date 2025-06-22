@@ -1,5 +1,8 @@
 import { Classrooms } from "@common/types/Classrooms";
 import { connector } from "../connector";
+import { DaysEnum } from "@common/types/DaysEnum";
+import { ProfessorCardData } from "@common/types/ProfessorCardData";
+import { EventDetailedInfoType } from "@common/types/EventDetailedInfoType";
 
 const endpoint = "/dashboard";
 
@@ -14,4 +17,38 @@ const getAllClassroomsListByFloor = async (
   }
 };
 
-export { getAllClassroomsListByFloor };
+const getProfessorsListByWeekdayAndCourse = async (
+  weekday: DaysEnum,
+  courseID: string,
+) => {
+  try {
+    const response = await connector.get(`${endpoint}/professors?weekday=${weekday.toUpperCase()}&course=${courseID}`);
+    return response.data as ProfessorCardData[];
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const getEventDetailedInfo = async (
+  id: string,
+) => {
+  try {
+    const response = await connector.get(`${endpoint}/events/${id}`);
+    return response.data as EventDetailedInfoType;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const getAllEventsFromProfessorById = async (
+  id: string,
+) => {
+  try {
+    const response = await connector.get(`${endpoint}/professors/${id}`);
+    return response.data as any;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export { getAllClassroomsListByFloor, getProfessorsListByWeekdayAndCourse, getEventDetailedInfo, getAllEventsFromProfessorById };

@@ -1,33 +1,25 @@
 import { FlatList, View } from "react-native";
 import { TitleView } from "../TitleView/TitleView";
 import { GenericTwoLineCard } from "../Cards/GenericTwoLineCard/GenericTwoLineCard";
+import { Events } from "@common/types/Events";
 
 interface Props {
   title: string;
+  events: Events[];
 }
 
 const GenericScroller = (props: Props) => {
-  const { title } = props;
-  const mock = [
-    { title: "A505", subtitle: "19:50 - 20:40" },
-    { title: "A505", subtitle: "19:50 - 20:40" },
-    { title: "A505", subtitle: "19:50 - 20:40" },
-    { title: "A505", subtitle: "19:50 - 20:40" },
-    { title: "A505", subtitle: "19:50 - 20:40" },
-    { title: "A505", subtitle: "19:50 - 20:40" },
-    { title: "A505", subtitle: "19:50 - 20:40" },
-    { title: "A505", subtitle: "19:50 - 20:40" },
-    { title: "A505", subtitle: "19:50 - 20:40" },
-  ];
+  const { title, events } = props;
+  
   return (
-    <View>
+    <View style={{paddingVertical: 10, alignItems: 'center'}}>
       <TitleView title={title} />
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        data={mock}
+        data={events}
         renderItem={({ item }) => (
-          <GenericTwoLineCard title={item.title} subtitle={item.subtitle} />
+          <GenericTwoLineCard title={item.description} subtitle={`${item.startTime.slice(0, 5)} - ${item.endTime.slice(0, 5)}`} />
         )}
       />
     </View>
