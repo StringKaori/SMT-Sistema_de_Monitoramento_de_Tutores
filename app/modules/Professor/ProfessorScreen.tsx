@@ -62,7 +62,7 @@ const ProfessorScreen = ({ route }: Prop) => {
         showsVerticalScrollIndicator={false}
       >
         {allEvents && Object.values(DaysEnum).map((day) => (
-          allEvents[day].length > 0 ? <GenericScroller key={day} title={day} events={allEvents[day]} /> : <></>
+          allEvents[day].length > 0 ? <GenericScroller key={day} title={day} events={allEvents[day]} /> : null
         ))}
       </ScrollView>
     </View>
