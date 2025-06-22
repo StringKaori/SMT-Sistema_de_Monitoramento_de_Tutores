@@ -6,11 +6,11 @@ import { EventDetailedInfoType } from "@common/types/EventDetailedInfoType";
 
 const endpoint = "/dashboard";
 
-const getAllClassroomsListByFloor = async (
-  floor: number,
-) => {
+const getAllClassroomsListByFloor = async (floor: number) => {
   try {
-    const response = await connector.get(`${endpoint}/classrooms?floor=${floor}`);
+    const response = await connector.get(
+      `${endpoint}/classrooms?floor=${floor}`
+    );
     return response.data as Classrooms[];
   } catch (e) {
     console.error(e);
@@ -19,19 +19,19 @@ const getAllClassroomsListByFloor = async (
 
 const getProfessorsListByWeekdayAndCourse = async (
   weekday: DaysEnum,
-  courseID: string,
+  courseID: string
 ) => {
   try {
-    const response = await connector.get(`${endpoint}/professors?weekday=${weekday.toUpperCase()}&course=${courseID}`);
+    const response = await connector.get(
+      `${endpoint}/professors?weekday=${weekday.toUpperCase()}&course=${courseID}`
+    );
     return response.data as ProfessorCardData[];
   } catch (e) {
     console.error(e);
   }
 };
 
-const getEventDetailedInfo = async (
-  id: string,
-) => {
+const getEventDetailedInfo = async (id: string) => {
   try {
     const response = await connector.get(`${endpoint}/events/${id}`);
     return response.data as EventDetailedInfoType;
@@ -40,9 +40,7 @@ const getEventDetailedInfo = async (
   }
 };
 
-const getAllEventsFromProfessorById = async (
-  id: string,
-) => {
+const getAllEventsFromProfessorById = async (id: string) => {
   try {
     const response = await connector.get(`${endpoint}/professors/${id}`);
     return response.data as any;
@@ -51,4 +49,19 @@ const getAllEventsFromProfessorById = async (
   }
 };
 
-export { getAllClassroomsListByFloor, getProfessorsListByWeekdayAndCourse, getEventDetailedInfo, getAllEventsFromProfessorById };
+const getAllEventsFromClassroomById = async (id: string) => {
+  try {
+    const response = await connector.get(`${endpoint}/classrooms/${id}`);
+    return response.data as any;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export {
+  getAllClassroomsListByFloor,
+  getProfessorsListByWeekdayAndCourse,
+  getEventDetailedInfo,
+  getAllEventsFromProfessorById,
+  getAllEventsFromClassroomById,
+};

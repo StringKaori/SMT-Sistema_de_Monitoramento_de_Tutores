@@ -5,20 +5,17 @@ import { useThemeStore } from "app/theme/useThemeStore";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
 interface RoomCardProps {
-  data: Classrooms,
-  navigation: RootStackNavigationProp
+  data: Classrooms;
+  navigation: RootStackNavigationProp;
 }
 
 const RoomCard = (props: RoomCardProps) => {
-  const { data, navigation } = props
+  const { data, navigation } = props;
   const { width, height, theme } = useThemeStore();
-
   const styles = createStyles(width, height, theme.colors);
 
   return (
-    <TouchableOpacity 
-      style={styles.container}
-      onPress={() => navigation.navigate("RoomsMoreInfoScreen", data)}>
+    <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("RoomsMoreInfoScreen", data)}>
       <Text style={styles.text}>{data.description}</Text>
     </TouchableOpacity>
   );
@@ -31,7 +28,7 @@ const createStyles = (width: number, height: number, colors: ThemeColors) =>
       justifyContent: "center",
 
       borderWidth: 2,
-      borderColor: colors.outline ,
+      borderColor: colors.outline,
       borderRadius: 10,
 
       width: width * 0.45,
