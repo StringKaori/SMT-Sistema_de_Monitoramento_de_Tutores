@@ -25,3 +25,13 @@ export async function getUserID(): Promise<string | null> {
 export async function removeUserID() {
   await SecureStore.deleteItemAsync("userID");
 }
+
+// MARK: - IP
+
+export async function saveIP(ip: string) {
+  await SecureStore.setItemAsync("baseIP", ip);
+}
+
+export async function getIP(): Promise<string | null> {
+  return await SecureStore.getItemAsync("baseIP");
+}
