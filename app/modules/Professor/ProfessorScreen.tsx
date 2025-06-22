@@ -20,7 +20,7 @@ const ProfessorScreen = ({ route }: Prop) => {
   const insets = useSafeAreaInsets();
   const styles = createStyles(theme.colors, height);
   const professor: ProfessorCardData = route.params;
-  const [allEvents, setAllEvents] = useState<Record<DaysEnum, Events[]>>()
+  const [allEvents, setAllEvents] = useState<Record<DaysEnum, Events[]>>();
 
   useEffect(() => {
     const getAllEvents = async () => {
@@ -48,7 +48,6 @@ const ProfessorScreen = ({ route }: Prop) => {
         }
       );
       setAllEvents(groupedByWeekday);
-      
     };
 
     getAllEvents();
@@ -61,9 +60,12 @@ const ProfessorScreen = ({ route }: Prop) => {
         style={{ marginBottom: insets.bottom }}
         showsVerticalScrollIndicator={false}
       >
-        {allEvents && Object.values(DaysEnum).map((day) => (
-          allEvents[day].length > 0 ? <GenericScroller key={day} title={day} events={allEvents[day]} /> : null
-        ))}
+        {allEvents &&
+          Object.values(DaysEnum).map((day) =>
+            allEvents[day].length > 0 ? (
+              <GenericScroller key={day} title={day} events={allEvents[day]} isProfessor/>
+            ) : null
+          )}
       </ScrollView>
     </View>
   );
@@ -80,7 +82,7 @@ const createStyles = (colors: ThemeColors, height: number) =>
       fontSize: height * 0.03,
       fontWeight: "bold",
       paddingBottom: 20,
-      textAlign: 'center'
+      textAlign: "center",
     },
   });
 
