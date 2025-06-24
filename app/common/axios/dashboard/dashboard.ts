@@ -3,6 +3,7 @@ import { connector } from "../connector";
 import { DaysEnum } from "@common/types/DaysEnum";
 import { ProfessorCardData } from "@common/types/ProfessorCardData";
 import { EventDetailedInfoType } from "@common/types/EventDetailedInfoType";
+import { SearchResultType } from "@common/types/SearchScreenData";
 
 const endpoint = "/dashboard";
 
@@ -58,10 +59,20 @@ const getAllEventsFromClassroomById = async (id: string) => {
   }
 };
 
+const searchProfessorsAndClassrooms = async (query: string) => {
+  try {
+    const response = await connector.get(`${endpoint}/search?query=${query}`);
+    return response.data as SearchResultType;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 export {
   getAllClassroomsListByFloor,
   getProfessorsListByWeekdayAndCourse,
   getEventDetailedInfo,
   getAllEventsFromProfessorById,
   getAllEventsFromClassroomById,
+  searchProfessorsAndClassrooms
 };
