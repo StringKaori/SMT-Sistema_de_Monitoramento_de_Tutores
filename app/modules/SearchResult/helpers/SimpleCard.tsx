@@ -34,7 +34,7 @@ const createStyles = (width: number, height: number, colors: ThemeColors) =>
       borderRadius: 10,
 
       width: width * 0.45,
-      height: height * 0.06,
+      height: height * 0.1,
       margin: 5,
 
       padding: 5,
