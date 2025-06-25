@@ -26,27 +26,27 @@ const ProfessorCard = (props: ProfessorCardProps) => {
     const today = new Date().toLocaleDateString("en-US", {
       weekday: "long",
     });
-    
+
     if (!events || events.length === 0 || events[0].weekday !== today) return;
-    
+
     const now = new Date();
     let foundEvent = undefined;
 
     for (const event of events) {
       const startTime = timeStringShortToDate(event.startTime);
       const endTime = timeStringShortToDate(event.endTime);
-      const getTimeInMinutes = (date: Date) =>
-        date.getUTCHours() * 60 + date.getUTCMinutes();
-      const nowMinute = getTimeInMinutes(now);
-      const startTimeMinute = getTimeInMinutes(startTime);
-      const endTimeMinute = getTimeInMinutes(endTime);
+      // const getTimeInMinutes = (date: Date) =>
+      //   date.getUTCHours() * 60 + date.getUTCMinutes();
+      // const nowMinute = getTimeInMinutes(now);
+      // const startTimeMinute = getTimeInMinutes(startTime);
+      // const endTimeMinute = getTimeInMinutes(endTime);
 
-      if (nowMinute >= startTimeMinute && nowMinute <= endTimeMinute) {
+      if (now >= startTime && now <= endTime) {
         foundEvent = event;
         break;
       }
     }
-    
+
     setClosestEvent(foundEvent);
   }, [events]);
 
@@ -57,11 +57,11 @@ const ProfessorCard = (props: ProfessorCardProps) => {
           const response = await getEventDetailedInfo(closestEvent.id);
           setEventMoreInfo(response);
         } catch (error) {
-          console.error('Error fetching event details:', error);
+          console.error("Error fetching event details:", error);
         }
       }
     };
-    
+
     getEventMoreInfo();
   }, [closestEvent]);
 
@@ -76,8 +76,15 @@ const ProfessorCard = (props: ProfessorCardProps) => {
 
       <View style={styles.verticalView}>
         <Text style={[styles.secondaryText]}>
-          {closestEvent?.startTime && closestEvent?.endTime && eventMoreInfo?.classroom?.description
-            ? `${eventMoreInfo.classroom.description}  ${closestEvent.startTime.slice(0, 5)} - ${closestEvent.endTime.slice(0, 5)}`
+          {closestEvent?.startTime &&
+          closestEvent?.endTime &&
+          eventMoreInfo?.classroom?.description
+            ? `${
+                eventMoreInfo.classroom.description
+              }  ${closestEvent.startTime.slice(
+                0,
+                5
+              )} - ${closestEvent.endTime.slice(0, 5)}`
             : "Not currently in class"}
         </Text>
       </View>

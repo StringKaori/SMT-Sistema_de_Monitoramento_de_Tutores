@@ -8,12 +8,21 @@ import {
 import SearchIcon from "@assets/search_icon.svg";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { ThemeColors } from "app/theme/types/ThemeType";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
 
 const SearchBar = () => {
   const { width, height, theme } = useThemeStore();
   const iconSize = height * 0.035;
+  const [query, setQuery] = useState<string>("");
 
   const styles = createStyles(width, height, theme.colors, iconSize);
+  const navigation = useNavigation<RootStackNavigationProp>();
+
+  const onSubmit = () => {
+    navigation.navigate("SearchResultScreen", {query: query});
+  }
 
   return (
     <SafeAreaView edges={["top"]} style={styles.container}>
@@ -22,10 +31,14 @@ const SearchBar = () => {
           placeholder="Search rooms or professors"
           placeholderTextColor={theme.colors.secondaryText}
           style={styles.input}
+          value={query}
+          onChangeText={setQuery}
+          onSubmitEditing={onSubmit}
         />
         <TouchableOpacity
           style={styles.iconContainer}
           accessibilityLabel="Search"
+          onPress={onSubmit}
         >
           <SearchIcon width={iconSize} height={iconSize} />
         </TouchableOpacity>
