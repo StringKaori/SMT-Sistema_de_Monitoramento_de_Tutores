@@ -1,4 +1,3 @@
-import { Classrooms } from "@common/types/Classrooms";
 import { ThemeColors } from "app/theme/types/ThemeType";
 import { useThemeStore } from "app/theme/useThemeStore";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";

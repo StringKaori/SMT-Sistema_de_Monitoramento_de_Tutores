@@ -15,6 +15,15 @@ import { APIError } from "@common/axios";
 import * as Location from "expo-location";
 import * as Notifications from "expo-notifications";
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldPlaySound: false,
+    shouldSetBadge: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
+
 export default function App() {
   const { width, height } = useWindowDimensions();
   const { setWidth, setHeight } = useThemeStore();
@@ -71,6 +80,20 @@ export default function App() {
       }
     }
     handlePermissions();
+  }, []);
+
+  useEffect(() => {
+    const registerForPushNotificationsAsync = async () => {
+      if (Platform.OS === "android") {
+        await Notifications.setNotificationChannelAsync("main", {
+          name: "main",
+          importance: Notifications.AndroidImportance.MAX,
+          vibrationPattern: [0, 250, 250, 250],
+          lightColor: "#FF231F7C",
+        });
+      }
+    };
+    registerForPushNotificationsAsync();
   }, []);
 
   return (
