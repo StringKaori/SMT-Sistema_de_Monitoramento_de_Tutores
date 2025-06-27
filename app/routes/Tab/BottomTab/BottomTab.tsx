@@ -27,7 +27,6 @@ const BottomTab = () => {
     <Tab.Navigator
       screenOptions={({ navigation }) => ({
         tabBarStyle: {
-          
           height: 60 + insets.bottom,
           elevation: 0,
           borderTopWidth: 1,
@@ -55,7 +54,7 @@ const BottomTab = () => {
         }}
       />
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name={"FavoritesScreenTab"}
         component={FavoritesScreen}
         options={{
@@ -64,7 +63,7 @@ const BottomTab = () => {
             <TabBarIcon focused={focused} DefaultSVG={FavoriteSVG} FocusedSVG={FocusedFavoriteSVG} />
           ),
         }}
-      />
+      /> */}
 
       <Tab.Screen
         name={"RoomsScreenTab"}
