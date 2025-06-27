@@ -13,18 +13,20 @@ interface Props {
 }
 
 const UserForm = (props: Props) => {
-  const {item, isEditing} = props;
+  const { item, isEditing } = props;
   const { theme } = useThemeStore();
   const styles = createStyles(theme.colors.background);
   const viewModel = useUserFormViewModel(item, isEditing);
 
-  useEffect(()=> {
-    if(item) {
-      viewModel.setEmail(item.email)
-      viewModel.setFullName(item.fullName)
-      if(item.authoritiesList.includes("ROLE_ADMIN_USER")) { viewModel.setIsAdmin(true) }
+  useEffect(() => {
+    if (item) {
+      viewModel.setEmail(item.email);
+      viewModel.setFullName(item.fullName);
+      if (item.authoritiesList.includes("ROLE_ADMIN_USER")) {
+        viewModel.setIsAdmin(true);
+      }
     }
-  }, [])
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -45,17 +47,32 @@ const UserForm = (props: Props) => {
         onChangeText={viewModel.setEnrollment}
         placeholder={"Enrollment"}
       />
-      <View style={{ flexDirection: "row", alignItems: "center", alignSelf: 'flex-end'}}>
-      <Switch value={viewModel.isAdmin} onValueChange={viewModel.setIsAdmin} />
-      <Text>Is Admin</Text>
-    </View>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          alignSelf: "flex-end",
+          paddingBottom: 10
+        }}
+      >
+        <Switch
+          value={viewModel.isAdmin}
+          onValueChange={viewModel.setIsAdmin}
+          trackColor={{ false: theme.colors.outline, true: theme.colors.primary }}
+          thumbColor={viewModel.isAdmin ? "#ffffff" : "#f4f3f4"}
+        />
+        <Text>Is Admin</Text>
+      </View>
       {viewModel.showError && (
         <Text style={{ color: `red`, paddingBottom: 10 }}>
           Error, all fields must be filled
         </Text>
       )}
       {/* TODO: Revisar para não repetir o isEditing ? "Update" : "Create"*/}
-      <SubmitFormButton title={isEditing ? "Update" : "Create"} handlePress={viewModel.handlePress} />
+      <SubmitFormButton
+        title={isEditing ? "Update" : "Create"}
+        handlePress={viewModel.handlePress}
+      />
     </SafeAreaView>
   );
 };
