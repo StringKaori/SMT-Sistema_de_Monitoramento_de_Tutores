@@ -81,6 +81,14 @@ const RequiredResources = () => {
 
   return (
     <View style={styles.container}>
+      <TitleView title={"Send notification"} />
+      <View style={{paddingTop: 10}}/>
+      <DefaultTextInput value={title} onChangeText={setTitle} placeholder={"Push title"}/>
+      <DefaultTextInput value={body} onChangeText={setBody} placeholder={"Push body"}/>
+      <TouchableOpacity style={styles.button} onPress={() => sendPush(title, body)}>
+        <Text>Send Push</Text>
+      </TouchableOpacity>
+
       <TitleView title={"Current Location"} />
       {errorMsg ? (
         <Text style={styles.error}>{errorMsg}</Text>
@@ -95,14 +103,6 @@ const RequiredResources = () => {
       ) : (
         <Text>Getting location...</Text>
       )}
-
-      <TitleView title={"Send notification"} />
-      <View style={{paddingTop: 10}}/>
-      <DefaultTextInput value={title} onChangeText={setTitle} placeholder={"Push title"}/>
-      <DefaultTextInput value={body} onChangeText={setBody} placeholder={"Push body"}/>
-      <TouchableOpacity style={styles.button} onPress={() => sendPush(title, body)}>
-        <Text>Send Push</Text>
-      </TouchableOpacity>
     </View>
   );
 };
