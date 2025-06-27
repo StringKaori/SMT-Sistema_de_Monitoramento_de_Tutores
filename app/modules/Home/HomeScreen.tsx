@@ -1,6 +1,10 @@
 import { HorizontalScroller, ProfessorCard } from "@common/components";
 import { DaysEnum } from "@common/types/DaysEnum";
-import { View, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+} from "react-native";
 import { CourseSelector } from "@common/components/CourseSelector/CourseSelector";
 import { useHomeViewModel } from "./useHomeViewModel";
 import { useThemeStore } from "app/theme/useThemeStore";

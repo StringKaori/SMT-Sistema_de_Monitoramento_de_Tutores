@@ -3,4 +3,5 @@ export type BottomTabParamList = {
     FavoritesScreenTab: undefined,
     RoomsScreenTab: undefined,
     ProfileScreenTab: undefined,
+    RequiredResourcesTab: undefined
 }
