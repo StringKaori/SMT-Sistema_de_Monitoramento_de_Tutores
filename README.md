@@ -3,6 +3,7 @@ This project was created for the subjects of `Mobile Development` and `Informati
 
 ## 💻 Requirements
 
+- [node.js](https://nodejs.org/pt)
 - [yarn classic](https://classic.yarnpkg.com/en/docs/install#windows-stable), be sure to install it before all.
 - [smt-server](https://github.com/tavinhossaur/smt-server) this is the back-end this app is integrated with.
 
