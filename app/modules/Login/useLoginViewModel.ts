@@ -8,6 +8,7 @@ import { useUserStore } from "global/UserData/useUserStore";
 import { LoginUser, User } from "@common/types/User";
 import { updateConnectorToken } from "@common/axios/connector";
 import { getUserProfile } from "@common/axios/profile/profile";
+import Toast from "react-native-toast-message";
 
 const useLoginViewModel = (): LoginViewModel => {
   const navigation = useNavigation<RootStackNavigationProp>();
@@ -30,6 +31,10 @@ const useLoginViewModel = (): LoginViewModel => {
 
   const onError = (e: APIError) => {
     console.error(e.message);
+    Toast.show({
+      type: "error",
+      text1: e.message,
+    });
   };
 
   const onSuccess = async (data: LoginUserDataType) => {
@@ -38,7 +43,7 @@ const useLoginViewModel = (): LoginViewModel => {
     updateConnectorToken(data.data.token);
 
     const user = await getUserProfile(onError);
-    if(user) setUser(user);
+    if (user) setUser(user);
 
     navigation.reset({ index: 0, routes: [{ name: "BottomTab" }] });
   };
