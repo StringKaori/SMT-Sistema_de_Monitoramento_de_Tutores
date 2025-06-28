@@ -12,7 +12,6 @@ import { TitleView } from "@common/components";
 import { SimpleCard } from "./helpers/SimpleCard";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RootStackNavigationProp } from "@common/types/RootStackNavigationProp";
-import { Classrooms } from "@common/types/Classrooms";
 
 interface Prop {
   route: RouteProp<RootStackParamList, "SearchResultScreen">;
